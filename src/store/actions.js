@@ -1,8 +1,9 @@
 import { overide, WalletWrapper } from '@/wallets';
+import url from 'url';
 
-const addNotification = function ({ commit, state }, val) {
+const addNotification = function({ commit, state }, val) {
   const newNotif = {};
-  Object.keys(state.notifications).forEach((item) => {
+  Object.keys(state.notifications).forEach(item => {
     newNotif[item] = state.notifications[item];
   });
 
@@ -18,28 +19,28 @@ const addNotification = function ({ commit, state }, val) {
   commit('ADD_NOTIFICATION', newNotif);
 };
 
-const addCustomPath = function ({ commit, state }, val) {
+const addCustomPath = function({ commit, state }, val) {
   const newPaths = { ...state.customPaths };
   newPaths[val.dpath] = { label: val.label, dpath: val.dpath };
   commit('ADD_CUSTOM_PATH', newPaths);
 };
 
-const checkIfOnline = function ({ commit }) {
+const checkIfOnline = function({ commit }) {
   commit('CHECK_IF_ONLINE');
 };
 
-const clearWallet = function ({ commit, state }) {
+const clearWallet = function({ commit, state }) {
   if (state.wallet.identifier === 'MEWconnect') {
     state.wallet.wallet.mewConnectDisconnect();
   }
   commit('CLEAR_WALLET');
 };
 
-const createAndSignTx = function ({ commit }, val) {
+const createAndSignTx = function({ commit }, val) {
   commit('CREATE_AND_SIGN_TX', val);
 };
 
-const decryptWallet = function ({ commit, state }, wallet) {
+const decryptWallet = function({ commit, state }, wallet) {
   const wrappedWallet = new WalletWrapper(wallet);
   const _web3 = state.web3;
   overide(_web3, wrappedWallet, this._vm.$eventHub);
@@ -47,43 +48,54 @@ const decryptWallet = function ({ commit, state }, wallet) {
   commit('SET_WEB3_INSTANCE', _web3);
 };
 
-const setAccountBalance = function ({ commit }, balance) {
+const setAccountBalance = function({ commit }, balance) {
   commit('SET_ACCOUNT_BALANCE', +balance);
 };
 
-const setGasPrice = function ({ commit }, gasPrice) {
+const setGasPrice = function({ commit }, gasPrice) {
   commit('SET_GAS_PRICE', gasPrice);
 };
 
-const setState = function ({ commit }, stateObj) {
+const setMetamaskWallet = function({ commit }, wallet) {
+  commit('SET_METAMASK_WALLET', wallet);
+};
+
+const setState = function({ commit }, stateObj) {
   commit('INIT_STATES', stateObj);
 };
 
-const setWeb3Instance = function ({ commit, state }, web3) {
-  if (web3.eth === undefined) {
-    // eslint-disable-next-line
-    const web3Instance = new web3(new web3.providers.HttpProvider(state.network.url));
-    commit(
-      'SET_WEB3_INSTANCE',
-      overide(web3Instance, state.wallet, this._vm.$eventHub)
-    );
-  } else {
+const setWeb3Instance = function({ commit, state }, web3) {
+  const hostUrl = url.parse(state.network.url);
+  try {
+    new web3();
+  } catch (e) {
     commit(
       'SET_WEB3_INSTANCE',
       overide(web3, state.wallet, this._vm.$eventHub)
     );
+    return;
   }
+  // eslint-disable-next-line
+  const web3Instance = new web3(
+    `${hostUrl.protocol}//${hostUrl.host}:${state.network.port}${
+      hostUrl.pathname
+    }`
+  );
+  commit(
+    'SET_WEB3_INSTANCE',
+    overide(web3Instance, state.wallet, this._vm.$eventHub)
+  );
 };
 
-const switchNetwork = function ({ commit }, networkObj) {
+const switchNetwork = function({ commit }, networkObj) {
   // check if wallet is hardware.  if true, check if it supports this network. if not, do nothing
   commit('SWITCH_NETWORK', networkObj);
 };
 
-const updateNotification = function ({ commit, state }, val) {
+const updateNotification = function({ commit, state }, val) {
   // address, index, object
   const newNotif = {};
-  Object.keys(state.notifications).forEach((item) => {
+  Object.keys(state.notifications).forEach(item => {
     newNotif[item] = state.notifications[item];
   });
 
@@ -91,7 +103,7 @@ const updateNotification = function ({ commit, state }, val) {
   commit('UPDATE_NOTIFICATION', newNotif);
 };
 
-const updatePageState = function ({ commit }, arr) {
+const updatePageState = function({ commit }, arr) {
   commit('CHANGE_PAGE_STATE', arr);
 };
 
@@ -104,6 +116,7 @@ export default {
   decryptWallet,
   setAccountBalance,
   setGasPrice,
+  setMetamaskWallet,
   setState,
   setWeb3Instance,
   switchNetwork,

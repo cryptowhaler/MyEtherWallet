@@ -27,9 +27,13 @@
     <!-- <install-metamask-modal
       ref="installMetamaskModal"
       
-    /> -->
+    /> -->    <!-- <install-metamask-modal
+      ref="installMetamaskModal"
+      :metamaskmodal="installMetamaskModalOpen"/> -->
 
-    <metamask-modal ref="metamastModal" :metamaskmodal="installMetamaskModalOpen" />
+    <metamask-modal ref="metamaskModal"/>
+
+    <!-- <metamask-modal ref="metamaskModal" :metamaskmodal="installMetamaskModalOpen" /> -->
 
     <software-modal
       ref="softwareModal"
@@ -96,7 +100,7 @@ import AccessWalletButton from '../../components/AccessWalletButton';
 import HardwareModal from '../../components/HardwareModal';
 import HardwarePasswordModal from '../../components/HardwarePasswordModal';
 import MetamaskModal from '../../components/MetamaskModal';
-import InstallMetamaskModal from '../../components/InstallMetamaskModal';
+// import InstallMetamaskModal from '../../components/InstallMetamaskModal';
 import MewConnectModal from '../../components/MewConnectModal';
 import NetworkAndAddressModal from '../../components/NetworkAndAddressModal';
 import PasswordModal from '../../components/PasswordModal';
@@ -121,7 +125,7 @@ export default {
     'hardware-modal': HardwareModal,
     'hardware-password-modal': HardwarePasswordModal,
     'metamask-modal': MetamaskModal,
-    'install-metamask-modal': InstallMetamaskModal,
+    // 'install-metamask-modal': InstallMetamaskModal,
     'software-modal': SoftwareModal,
     'password-modal': PasswordModal,
     'private-key-modal': PrivateKeyModal,
@@ -188,7 +192,7 @@ export default {
       this.$refs.hardwareModal.$refs.hardware.show();
     },
     metamaskModalOpen() {
-      this.$refs.metamastModal.$refs.metamask.show();
+      this.$refs.metamaskModal.$refs.metamask.show();
     },
     softwareModalOpen() {
       this.$refs.softwareModal.$refs.software.show();
