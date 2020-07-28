@@ -5,7 +5,8 @@
       :title="$t('interface.network')"
       hide-footer
       centered
-      class="bootstrap-modal network nopadding max-height-1">
+      class="bootstrap-modal network nopadding max-height-1"
+    >
       <div class="content-block">
         <div class="flex-container">
           <h4 class="modal-title">{{ $t('common.advanced') }}</h4>
@@ -16,60 +17,78 @@
                 <input
                   ref="addCustomToggle"
                   type="checkbox"
-                  @click="addCustomNetworkToggle">
-                <span class="slider round"/>
+                  @click="addCustomNetworkToggle"
+                />
+                <span class="slider round" />
               </label>
             </div>
           </div>
         </div>
       </div>
-      <div
-        ref="networkList"
-        class="network-list">
+      <div ref="networkList" class="network-list">
         <div
           v-for="(key, index) in Object.keys($store.state.Networks)"
           :key="key + index"
-          class="content-block">
+          class="content-block"
+        >
           <div class="network-title">
-            <img 
-              v-if="key === 'ROP' || key === 'RIN' || key === 'KOV'" 
-              src="~@/assets/images/icons/network.svg">
-            <img 
-              v-else 
-              :src="require(`@/assets/images/networks/${key.toLowerCase()}.svg`)">
+            <img
+              v-if="key === 'ROP' || key === 'RIN' || key === 'KOV'"
+              src="~@/assets/images/icons/network.svg"
+            />
+            <img
+              v-else
+              :src="
+                require(`@/assets/images/networks/${key.toLowerCase()}.svg`)
+              "
+            />
             <h4 :class="key.toLowerCase()">{{ key }}</h4>
           </div>
           <div class="grid-3">
             <p
               v-for="net in $store.state.Networks[key]"
               :key="net.service"
-              :class="net.service === $store.state.network.service && net.type.name === $store.state.network.type.name ? 'current-network': ''"
+              :class="
+                net.service === $store.state.network.service &&
+                net.type.name === $store.state.network.type.name
+                  ? 'current-network'
+                  : ''
+              "
               class="switch-network"
-              @click="switchNetwork(net)">{{ net.service }}</p>
+              @click="switchNetwork(net)"
+            >
+              {{ net.service }}
+            </p>
           </div>
         </div>
-        <div
-          v-if="customNetworks.length > 0"
-          class="content-block">
+        <div v-if="customNetworks.length > 0" class="content-block">
           <h4 class="cust">Custom Networks</h4>
           <div
             v-for="(net, idx) in customNetworks"
-            :key="net.service + '('+ net.type.name + ')' + idx"
-            class="grid-3">
+            :key="net.service + '(' + net.type.name + ')' + idx"
+            class="grid-3"
+          >
             <div
-              :class="net.service === $store.state.network.service && net.type.name === $store.state.network.type.name ? 'current-network': ''"
-              class="switch-network custom-network-item">
-              <p @click="switchNetwork(net)">{{ net.service }} {{ '('+ net.type.name + ')' }}</p>
+              :class="
+                net.service === $store.state.network.service &&
+                net.type.name === $store.state.network.type.name
+                  ? 'current-network'
+                  : ''
+              "
+              class="switch-network custom-network-item"
+            >
+              <p @click="switchNetwork(net)">
+                {{ net.service }} {{ '(' + net.type.name + ')' }}
+              </p>
               <i
                 class="fa fa-times-circle"
-                @click.prevent="removeNetwork(net, idx)"/>
+                @click.prevent="removeNetwork(net, idx)"
+              />
             </div>
           </div>
         </div>
       </div>
-      <form
-        ref="networkAdd"
-        class="network-add hidden">
+      <form ref="networkAdd" class="network-add hidden">
         <div class="content-block">
           <div class="input-block-container">
             <input
@@ -78,16 +97,16 @@
               type="text"
               name=""
               placeholder="ETH Node Name"
-              autocomplete="off">
-            <select
-              v-model="selectedNetwork"
-              class="custom-select-1">
+              autocomplete="off"
+            />
+            <select v-model="selectedNetwork" class="custom-select-1">
               <option
                 v-for="type in Object.keys(types)"
+                :key="types[type].name + types[type].name_long"
                 :value="types[type]"
-                :key="types[type].name + types[type].name_long">
-                {{ types[type].name | capitalize }} - {{ types[type].name_long |
-                capitalize }}
+              >
+                {{ types[type].name | capitalize }} -
+                {{ types[type].name_long | capitalize }}
               </option>
             </select>
             <input
@@ -96,14 +115,16 @@
               type="text"
               name=""
               placeholder="URL"
-              autocomplete="off">
+              autocomplete="off"
+            />
             <input
               v-model="port"
               class="custom-input-text-1"
               type="text"
               name=""
               placeholder="Port"
-              autocomplete="off">
+              autocomplete="off"
+            />
             <input
               v-show="selectedNetwork.name === 'Custom'"
               v-model="chainID"
@@ -111,7 +132,8 @@
               type="number"
               name=""
               placeholder="Chain ID"
-              autocomplete="off">
+              autocomplete="off"
+            />
           </div>
         </div>
 
@@ -121,31 +143,29 @@
             <div class="margin-left-auto add-custom-network">
               <div class="sliding-switch-white">
                 <label class="switch">
-                  <input
-                    type="checkbox"
-                    @click="expendAuth">
-                  <span class="slider round"/>
+                  <input type="checkbox" @click="expendAuth" />
+                  <span class="slider round" />
                 </label>
               </div>
             </div>
           </div>
-          <div
-            ref="authForm"
-            class="auth-form-container hidden">
+          <div ref="authForm" class="auth-form-container hidden">
             <input
               v-model="username"
               class="custom-input-text-1"
               type="text"
               name=""
               placeholder="User Name"
-              autocomplete="off">
+              autocomplete="off"
+            />
             <input
               v-model="password"
               class="custom-input-text-1"
               type="password"
               name=""
               placeholder="Password"
-              autocomplete="off">
+              autocomplete="off"
+            />
           </div>
         </div>
 
@@ -153,16 +173,17 @@
           <div class="save-button-container">
             <button
               class="save-button large-round-button-green-filled clickable"
-              @click.prevent="saveCustomNetwork">
+              @click.prevent="saveCustomNetwork"
+            >
               {{ $t('interface.save') }}
             </button>
             <interface-bottom-text
               :link-text="$t('interface.learnMore')"
               :question="$t('interface.dontKnow')"
-              link="/"/>
+              link="/"
+            />
           </div>
         </div>
-
       </form>
     </b-modal>
   </div>

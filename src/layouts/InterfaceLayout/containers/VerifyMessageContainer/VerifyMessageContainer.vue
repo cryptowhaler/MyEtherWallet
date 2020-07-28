@@ -1,12 +1,12 @@
 <template>
   <div class="deploy-contract-container">
-    <interface-container-title :title="$t('common.verifyMessage')"/>
+    <interface-container-title :title="$t('common.verifyMessage')" />
 
     <div class="send-form">
       <div class="title-container">
         <div class="title">
-          <h4>Signature: </h4>
-          <popover :popcontent="$t('popover.whatIsSignatureContent')"/>
+          <h4>Signature:</h4>
+          <popover :popcontent="$t('popover.whatIsSignatureContent')" />
           <div class="copy-buttons">
             <span @click="deleteInput">Clear</span>
             <span @click="copyToClipboard">Copy</span>
@@ -14,13 +14,15 @@
         </div>
       </div>
       <div class="the-form domain-name">
-        <textarea
-          ref="signature"
-          v-model="message"
-          class="custom-textarea-1"/>
+        <textarea ref="signature" v-model="message" class="custom-textarea-1" />
       </div>
       <div>
-        <p v-if="message !== '' && showMessage === true">{{ JSON.parse(message).address }} did sign the message:<br v-if="JSON.parse(message).msg.length > 20"> <b>{{ JSON.parse(message).msg }}</b></p>
+        <p v-if="message !== '' && showMessage === true">
+          {{ JSON.parse(message).address }} did sign the message:<br
+            v-if="JSON.parse(message).msg.length > 20"
+          />
+          <b>{{ JSON.parse(message).msg }}</b>
+        </p>
         <p v-if="message !== '' && error.show === true">{{ error.show }}</p>
       </div>
     </div>
@@ -29,16 +31,17 @@
       <div class="buttons">
         <div
           class="submit-button large-round-button-green-filled clickable"
-          @click="verifyMessage">
+          @click="verifyMessage"
+        >
           {{ $t('common.verifyMessage') }}
         </div>
       </div>
       <interface-bottom-text
         :link-text="$t('interface.learnMore')"
         :question="$t('interface.haveIssues')"
-        link="/"/>
+        link="/"
+      />
     </div>
-
   </div>
 </template>
 

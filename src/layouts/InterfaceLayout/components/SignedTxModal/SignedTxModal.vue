@@ -3,7 +3,8 @@
     ref="signedTx"
     hide-footer
     class="bootstrap-modal signed-tx-modal"
-    title="Signed Transaction">
+    title="Signed Transaction"
+  >
     <div class="d-block">
       <div class="title-block">
         <h4 class="block-title">Signed Transaction</h4>
@@ -16,7 +17,8 @@
           ref="signedTxInput"
           :value="signedTx"
           style="position: absolute; top: 0; opacity: 0;"
-          autocomplete="off">
+          autocomplete="off"
+        />
       </div>
       <div class="raw">
         <div class="title-block">
@@ -25,16 +27,12 @@
           </h4>
           <div class="sliding-switch-white">
             <label class="switch">
-              <input
-                type="checkbox"
-                @click="showRaw = !showRaw">
-              <span class="slider round"/>
+              <input type="checkbox" @click="showRaw = !showRaw" />
+              <span class="slider round" />
             </label>
           </div>
         </div>
-        <div
-          v-if="showRaw"
-          class="raw-tx-container">
+        <div v-if="showRaw" class="raw-tx-container">
           <code>
             {{ rawTx }}
           </code>
@@ -44,7 +42,8 @@
     <div class="button-container">
       <b-btn
         class="mid-round-button-green-filled close-button"
-        @click="copyAndContinue">
+        @click="copyAndContinue"
+      >
         Copy It and Continue
       </b-btn>
     </div>
@@ -61,13 +60,13 @@ export default {
     },
     rawTx: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       }
     },
     pathUpdate: {
       type: Function,
-      default: function() {}
+      default: function () {}
     }
   },
   data() {

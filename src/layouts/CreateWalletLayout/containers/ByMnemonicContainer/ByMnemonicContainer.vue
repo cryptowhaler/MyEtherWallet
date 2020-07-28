@@ -1,19 +1,18 @@
 <template>
   <div class="create-wallet-by-mnemonic">
-    <finish-modal/>
+    <finish-modal />
     <verification-modal
       :mnemonic-values="mnemonicValues"
-      :mnemonic-done-modal-open="mnemonicDoneModalOpen"/>
+      :mnemonic-done-modal-open="mnemonicDoneModalOpen"
+    />
     <div class="wrap">
       <div class="page-container">
         <div class="nav-tab-user-input-box">
           <b-tabs>
-            <div class="progress-bar"/>
-            <b-tab
-              title="By Mnemonic Phrase"
-              active>
+            <div class="progress-bar" />
+            <b-tab title="By Mnemonic Phrase" active>
               <div class="title-popover">
-                <h3>{{ $t("createWallet.byMnemonicWriteDown") }}</h3>
+                <h3>{{ $t('createWallet.byMnemonicWriteDown') }}</h3>
                 <popover :popcontent="$t('popover.whatIsMessageContent')" />
               </div>
               <div class="contents">
@@ -21,33 +20,33 @@
                   <div class="value-switch noselect">
                     <div class="sliding-switch">
                       <label class="switch">
-                        <input type="checkbox" >
+                        <input type="checkbox" />
                         <span
                           class="slider round"
-                          @click="mnemonicValueBitSizeChange"/>
+                          @click="mnemonicValueBitSizeChange"
+                        />
                       </label>
                       <div class="labels">
                         <span class="label-left white">12</span>
                         <span class="label-right">24</span>
                       </div>
                     </div>
-                    <span class="text__base link switch-label">{{ $t("createWallet.byMnemonicValue") }}</span>
+                    <span class="text__base link switch-label">{{
+                      $t('createWallet.byMnemonicValue')
+                    }}</span>
                   </div>
 
                   <div
                     class="random-button color-green noselect"
-                    @click="mnemonicValueRefresh">
-                    <i
-                      class="fa fa-refresh"
-                      aria-hidden="true"/>
-                    <span>{{ $t("createWallet.byMnemonicRandom") }}</span>
+                    @click="mnemonicValueRefresh"
+                  >
+                    <i class="fa fa-refresh" aria-hidden="true" />
+                    <span>{{ $t('createWallet.byMnemonicRandom') }}</span>
                   </div>
                 </div>
                 <div class="phrases">
                   <ul>
-                    <li
-                      v-for="(value, index) in mnemonicValues"
-                      :key="index">
+                    <li v-for="(value, index) in mnemonicValues" :key="index">
                       {{ index + 1 }}.<span>{{ value }}</span>
                     </li>
                   </ul>
@@ -56,13 +55,12 @@
               <div class="user-input">
                 <div
                   class="next-button large-round-button-green-filled clickable"
-                  @click="mnemonicVerificationModalOpen">
-                  {{ $t("createWallet.byMnemonicAlreadyWritten") }}
+                  @click="mnemonicVerificationModalOpen"
+                >
+                  {{ $t('createWallet.byMnemonicAlreadyWritten') }}
                 </div>
                 <router-link to="/">
-                  <img
-                    class="icon"
-                    src="~@/assets/images/icons/printer.svg">
+                  <img class="icon" src="~@/assets/images/icons/printer.svg" />
                 </router-link>
               </div>
               <input-footer />
@@ -127,7 +125,7 @@ export default {
     mnemonicDoneModalOpen() {
       let valid = false;
 
-      this.varificationValues.forEach(function(value) {
+      this.varificationValues.forEach(function (value) {
         const userInputText = document
           .querySelector('.phrases .word[data-index="' + value.no + '"]')
           .querySelector('input').value;
@@ -176,7 +174,7 @@ export default {
       let ranNums = [];
       this.varificationValues = [];
 
-      document.querySelectorAll('.phrases .word').forEach(function(el) {
+      document.querySelectorAll('.phrases .word').forEach(function (el) {
         el.classList.remove('verification');
         el.querySelector('span').classList.remove('hidden');
         el.querySelector('input').classList.add('hidden');

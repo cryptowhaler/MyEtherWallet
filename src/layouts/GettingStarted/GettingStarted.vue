@@ -1,48 +1,47 @@
 <template>
   <div class="create-wallet-warnings">
-
     <div class="wrap">
-
       <div class="nav-dots">
-        <p><i
-          class="fa fa-angle-up"
-          aria-hidden="true"/></p>
+        <p><i class="fa fa-angle-up" aria-hidden="true" /></p>
         <ul>
-          <li :class="cwwCurrent == 0 ? 'active' : ''"/>
-          <li :class="cwwCurrent == 1 ? 'active' : ''"/>
-          <li :class="cwwCurrent == 2 ? 'active' : ''"/>
-          <li :class="cwwCurrent == 3 ? 'active' : ''"/>
-          <li :class="cwwCurrent == 4 ? 'active' : ''"/>
+          <li :class="cwwCurrent == 0 ? 'active' : ''" />
+          <li :class="cwwCurrent == 1 ? 'active' : ''" />
+          <li :class="cwwCurrent == 2 ? 'active' : ''" />
+          <li :class="cwwCurrent == 3 ? 'active' : ''" />
+          <li :class="cwwCurrent == 4 ? 'active' : ''" />
         </ul>
-        <p><i
-          class="fa fa-angle-down"
-          aria-hidden="true"/></p>
+        <p><i class="fa fa-angle-down" aria-hidden="true" /></p>
       </div>
 
       <what-is-mew
         ref="cww1"
         :progress-bar-value="'__20percent'"
-        class="cww cww1"/>
+        class="cww cww1"
+      />
       <where-my-funds-stored
         ref="cww2"
         :progress-bar-value="'__40percent'"
-        class="cww cww2 positionBottom"/>
+        class="cww cww2 positionBottom"
+      />
       <what-if-i-lose-key
         ref="cww3"
         :progress-bar-value="'__60percent'"
-        class="cww cww3 positionBottom"/>
+        class="cww cww3 positionBottom"
+      />
       <some-helpful-tips
         ref="cww4"
         :progress-bar-value="'__80percent'"
-        class="cww cww4 positionBottom"/>
+        class="cww cww4 positionBottom"
+      />
       <congratulations
         ref="cww5"
         :progress-bar-value="'__100percent'"
-        class="cww cww5 positionBottom"/>
+        class="cww cww5 positionBottom"
+      />
 
       <div class="create-wallet-warnings__footer-container">
         <div class="create-wallet-warnings__mouse-scroll">
-          <img src="~@/assets/images/icons/mouse.svg">
+          <img src="~@/assets/images/icons/mouse.svg" />
           <p>Scroll</p>
         </div>
         <div class="create-wallet-warnings__footer">
@@ -56,9 +55,7 @@
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -81,11 +78,11 @@ export default {
     return {
       cwwCurrent: 0,
       cwwRefs: ['cww1', 'cww2', 'cww3', 'cww4', 'cww5'],
-      scrollListener: function() {}
+      scrollListener: function () {}
     };
   },
-  mounted: function() {
-    this.scrollListener = e => {
+  mounted: function () {
+    this.scrollListener = (e) => {
       if (e.deltaY < 0) {
         this.mouseScrollUp();
       }
@@ -100,7 +97,7 @@ export default {
     window.removeEventListener('wheel', this.scrollListener);
   },
   methods: {
-    mouseScrollDown: function() {
+    mouseScrollDown: function () {
       if (this.cwwCurrent < this.cwwRefs.length - 1) {
         this.cwwCurrent++;
         this.$refs[this.cwwRefs[this.cwwCurrent - 1]].$el.classList.add(
@@ -111,7 +108,7 @@ export default {
         );
       }
     },
-    mouseScrollUp: function() {
+    mouseScrollUp: function () {
       if (this.cwwCurrent > 0) {
         this.cwwCurrent--;
         this.$refs[this.cwwRefs[this.cwwCurrent + 1]].$el.classList.add(

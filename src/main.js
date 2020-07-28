@@ -50,7 +50,7 @@ const i18n = new VueI18n({
   silentTranslationWarn: true
 });
 
-Vue.filter('capitalize', function(value) {
+Vue.filter('capitalize', function (value) {
   if (!value) return '';
   value = value.toString();
   return value.charAt(0).toUpperCase() + value.slice(1);
@@ -61,5 +61,5 @@ new Vue({
   i18n,
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app');

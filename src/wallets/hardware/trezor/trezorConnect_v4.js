@@ -10,7 +10,7 @@
 const TREZOR_CONNECT_VERSION = 4;
 
 if (!Array.isArray) {
-  Array.isArray = function(arg) {
+  Array.isArray = function (arg) {
     return Object.prototype.toString.call(arg) === '[object Array]';
   };
 }
@@ -31,8 +31,8 @@ const isBrowser =
   {}.toString.call(window) === '[object Window]';
 
 const TrezorConnect = !isBrowser
-  ? (function() {})()
-  : (function() {
+  ? (function () {})()
+  : (function () {
       'use strict';
 
       const chrome = window.chrome;
@@ -79,8 +79,8 @@ const TrezorConnect = !isBrowser
          * asynchronously, use `open` first to avoid popup blockers.
          * @param {function(?Error)} callback
          */
-        this.open = function(callback) {
-          const onchannel = function(result) {
+        this.open = function (callback) {
+          const onchannel = function (result) {
             if (result instanceof Error) {
               callback(result);
             } else {
@@ -93,7 +93,7 @@ const TrezorConnect = !isBrowser
         /**
          * Close the opened popup, if any.
          */
-        this.close = function() {
+        this.close = function () {
           manager.close();
         };
 
@@ -101,7 +101,7 @@ const TrezorConnect = !isBrowser
          * Enable or disable closing the opened popup after a successful call.
          * @param {boolean} value
          */
-        this.closeAfterSuccess = function(value) {
+        this.closeAfterSuccess = function (value) {
           manager.closeAfterSuccess = value;
         };
 
@@ -109,7 +109,7 @@ const TrezorConnect = !isBrowser
          * Enable or disable closing the opened popup after a failed call.
          * @param {boolean} value
          */
-        this.closeAfterFailure = function(value) {
+        this.closeAfterFailure = function (value) {
           manager.closeAfterFailure = value;
         };
 
@@ -117,7 +117,7 @@ const TrezorConnect = !isBrowser
          * Set bitcore server
          * @param {string|Array<string>} value
          */
-        this.setBitcoreURLS = function(value) {
+        this.setBitcoreURLS = function (value) {
           if (typeof value === 'string') {
             manager.bitcoreURLS = [value];
           } else if (value instanceof Array) {
@@ -129,7 +129,7 @@ const TrezorConnect = !isBrowser
          * Set currency. Human readable coin name
          * @param {string|Array<string>} value
          */
-        this.setCurrency = function(value) {
+        this.setCurrency = function (value) {
           if (typeof value === 'string') {
             manager.currency = value;
           }
@@ -139,7 +139,7 @@ const TrezorConnect = !isBrowser
          * Set currency units (mBTC, BTC)
          * @param {string|Array<string>} value
          */
-        this.setCurrencyUnits = function(value) {
+        this.setCurrencyUnits = function (value) {
           if (typeof value === 'string') {
             manager.currencyUnits = value;
           }
@@ -149,7 +149,7 @@ const TrezorConnect = !isBrowser
          * Set coin info json url
          * @param {string|Array<string>} value
          */
-        this.setCoinInfoURL = function(value) {
+        this.setCoinInfoURL = function (value) {
           if (typeof value === 'string') {
             manager.coinInfoURL = value;
           }
@@ -159,7 +159,7 @@ const TrezorConnect = !isBrowser
          * Set max. limit for account discovery
          * @param {number} value
          */
-        this.setAccountDiscoveryLimit = function(value) {
+        this.setAccountDiscoveryLimit = function (value) {
           if (!isNaN(value)) {
             manager.accountDiscoveryLimit = value;
           }
@@ -169,7 +169,7 @@ const TrezorConnect = !isBrowser
          * Set max. gap for account discovery
          * @param {number} value
          */
-        this.setAccountDiscoveryGapLength = function(value) {
+        this.setAccountDiscoveryGapLength = function (value) {
           if (!isNaN(value)) {
             manager.accountDiscoveryGapLength = value;
           }
@@ -179,7 +179,7 @@ const TrezorConnect = !isBrowser
          * Set discovery BIP44 coin type
          * @param {number} value
          */
-        this.setAccountDiscoveryBip44CoinType = function(value) {
+        this.setAccountDiscoveryBip44CoinType = function (value) {
           if (!isNaN(value)) {
             manager.accountDiscoveryBip44CoinType = value;
           }
@@ -205,7 +205,7 @@ const TrezorConnect = !isBrowser
          * @param {function(XPubKeyResult)} callback
          * @param {?(string|array<number>)} requiredFirmware
          */
-        this.getXPubKey = function(path, callback, requiredFirmware) {
+        this.getXPubKey = function (path, callback, requiredFirmware) {
           if (typeof path === 'string') {
             path = parseHDPath(path);
           }
@@ -221,8 +221,8 @@ const TrezorConnect = !isBrowser
           );
         };
 
-        this.getFreshAddress = function(callback, requiredFirmware) {
-          const wrapperCallback = function(result) {
+        this.getFreshAddress = function (callback, requiredFirmware) {
+          const wrapperCallback = function (result) {
             if (result.success) {
               callback({ success: true, address: result.freshAddress });
             } else {
@@ -241,7 +241,7 @@ const TrezorConnect = !isBrowser
           );
         };
 
-        this.getAccountInfo = function(input, callback, requiredFirmware) {
+        this.getAccountInfo = function (input, callback, requiredFirmware) {
           try {
             manager.sendWithChannel(
               _fwStrFix(
@@ -258,7 +258,7 @@ const TrezorConnect = !isBrowser
           }
         };
 
-        this.getAllAccountsInfo = function(callback, requiredFirmware) {
+        this.getAllAccountsInfo = function (callback, requiredFirmware) {
           try {
             manager.sendWithChannel(
               _fwStrFix(
@@ -275,7 +275,7 @@ const TrezorConnect = !isBrowser
           }
         };
 
-        this.getBalance = function(callback, requiredFirmware) {
+        this.getBalance = function (callback, requiredFirmware) {
           manager.sendWithChannel(
             _fwStrFix(
               {
@@ -306,7 +306,7 @@ const TrezorConnect = !isBrowser
          *
          * @see https://github.com/trezor/trezor-common/blob/master/protob/types.proto
          */
-        this.signTx = function(
+        this.signTx = function (
           inputs,
           outputs,
           callback,
@@ -328,12 +328,12 @@ const TrezorConnect = !isBrowser
         };
 
         // new implementation with ethereum at beginnig
-        this.ethereumSignTx = function() {
+        this.ethereumSignTx = function () {
           this.signEthereumTx.apply(this, arguments);
         };
 
         // old fallback
-        this.signEthereumTx = function(
+        this.signEthereumTx = function (
           address_n,
           nonce,
           gas_price,
@@ -386,7 +386,7 @@ const TrezorConnect = !isBrowser
          * @param {function(SignTxResult)} callback
          * @param {?(string|array<number>)} requiredFirmware
          */
-        this.composeAndSignTx = function(
+        this.composeAndSignTx = function (
           recipients,
           callback,
           requiredFirmware
@@ -422,7 +422,7 @@ const TrezorConnect = !isBrowser
          *
          * @see https://github.com/trezor/trezor-common/blob/master/protob/messages.proto
          */
-        this.requestLogin = function(
+        this.requestLogin = function (
           hosticon,
           challenge_hidden,
           challenge_visual,
@@ -469,7 +469,7 @@ const TrezorConnect = !isBrowser
          * @param {?(string|array<number>)} requiredFirmware
          *
          */
-        this.signMessage = function(
+        this.signMessage = function (
           path,
           message,
           callback,
@@ -508,7 +508,7 @@ const TrezorConnect = !isBrowser
          * @param {?(string|array<number>)} requiredFirmware
          *
          */
-        this.ethereumSignMessage = function(
+        this.ethereumSignMessage = function (
           path,
           message,
           callback,
@@ -544,7 +544,7 @@ const TrezorConnect = !isBrowser
          * @param {?(string|array<number>)} requiredFirmware
          *
          */
-        this.verifyMessage = function(
+        this.verifyMessage = function (
           address,
           signature,
           message,
@@ -583,7 +583,7 @@ const TrezorConnect = !isBrowser
          * @param {?(string|array<number>)} requiredFirmware
          *
          */
-        this.ethereumVerifyMessage = function(
+        this.ethereumVerifyMessage = function (
           address,
           signature,
           message,
@@ -620,7 +620,7 @@ const TrezorConnect = !isBrowser
          * @param {?(string|array<number>)} requiredFirmware
          *
          */
-        this.cipherKeyValue = function(
+        this.cipherKeyValue = function (
           path,
           key,
           value,
@@ -665,7 +665,7 @@ const TrezorConnect = !isBrowser
           );
         };
 
-        this.nemGetAddress = function(
+        this.nemGetAddress = function (
           address_n,
           network,
           callback,
@@ -690,7 +690,7 @@ const TrezorConnect = !isBrowser
           );
         };
 
-        this.nemSignTx = function(
+        this.nemSignTx = function (
           address_n,
           transaction,
           callback,
@@ -715,7 +715,7 @@ const TrezorConnect = !isBrowser
           );
         };
 
-        this.pushTransaction = function(rawTx, callback) {
+        this.pushTransaction = function (rawTx, callback) {
           if (!/^[0-9A-Fa-f]*$/.test(rawTx)) {
             throw new TypeError(
               'TrezorConnect: Transaction must be hexadecimal'
@@ -743,7 +743,7 @@ const TrezorConnect = !isBrowser
          * @param {?(string|array<number>)} requiredFirmware
          *
          */
-        this.getAddress = function(
+        this.getAddress = function (
           address,
           coin,
           segwit,
@@ -775,7 +775,7 @@ const TrezorConnect = !isBrowser
          * @param {?(string|array<number>)} requiredFirmware
          *
          */
-        this.ethereumGetAddress = function(
+        this.ethereumGetAddress = function (
           address,
           callback,
           requiredFirmware
@@ -824,7 +824,7 @@ const TrezorConnect = !isBrowser
          * It's not required to use these special elements, feel free to call
          * `TrezorConnect.requestLogin` directly.
          */
-        this.renderLoginButtons = function() {
+        this.renderLoginButtons = function () {
           const elements = document.getElementsByTagName('trezor:login');
 
           for (let i = 0; i < elements.length; i++) {
@@ -850,17 +850,17 @@ const TrezorConnect = !isBrowser
       }
 
       /*
- * `getXPubKey()`
- */
+       * `getXPubKey()`
+       */
 
       function parseHDPath(string) {
         return string
           .toLowerCase()
           .split('/')
-          .filter(function(p) {
+          .filter(function (p) {
             return p !== 'm';
           })
-          .map(function(p) {
+          .map(function (p) {
             let hardened = false;
             if (p[p.length - 1] === "'") {
               hardened = true;
@@ -879,8 +879,8 @@ const TrezorConnect = !isBrowser
       }
 
       /*
- * Popup management
- */
+       * Popup management
+       */
 
       function ChromePopup(url, name, width, height) {
         const left = (screen.width - width) / 2;
@@ -895,13 +895,13 @@ const TrezorConnect = !isBrowser
           }
         };
 
-        const closed = function() {
+        const closed = function () {
           if (this.onclose) {
             this.onclose(false); // never report as blocked
           }
         }.bind(this);
 
-        const opened = function(w) {
+        const opened = function (w) {
           this.window = w;
           this.window.onClosed.addListener(closed);
         }.bind(this);
@@ -916,7 +916,7 @@ const TrezorConnect = !isBrowser
       function ChromeChannel(popup, waiting) {
         let port = null;
 
-        const respond = function(data) {
+        const respond = function (data) {
           if (waiting) {
             const w = waiting;
             waiting = null;
@@ -924,7 +924,7 @@ const TrezorConnect = !isBrowser
           }
         };
 
-        const setup = function(p) {
+        const setup = function (p) {
           if (p.name === popup.name) {
             port = p;
             port.onMessage.addListener(respond);
@@ -936,14 +936,14 @@ const TrezorConnect = !isBrowser
 
         this.respond = respond;
 
-        this.close = function() {
+        this.close = function () {
           chrome.runtime.onConnect.removeListener(setup);
           port.onMessage.removeListener(respond);
           port.disconnect();
           port = null;
         };
 
-        this.send = function(value, callback) {
+        this.send = function (value, callback) {
           if (waiting === null) {
             waiting = callback;
 
@@ -979,7 +979,7 @@ const TrezorConnect = !isBrowser
 
         let interval = null;
         const blocked = w.closed;
-        const iterate = function() {
+        const iterate = function () {
           if (w.closed) {
             clearInterval(interval);
             if (this.onclose) {
@@ -995,7 +995,7 @@ const TrezorConnect = !isBrowser
       }
 
       function Channel(popup, waiting) {
-        const respond = function(data) {
+        const respond = function (data) {
           if (waiting) {
             const w = waiting;
             waiting = null;
@@ -1003,7 +1003,7 @@ const TrezorConnect = !isBrowser
           }
         };
 
-        const receive = function(event) {
+        const receive = function (event) {
           // eslint-disable-next-line no-useless-escape
           const org1 = event.origin.match(/^.+\:\/\/[^\â€Œâ€‹/]+/)[0];
           // eslint-disable-next-line no-useless-escape
@@ -1018,11 +1018,11 @@ const TrezorConnect = !isBrowser
 
         this.respond = respond;
 
-        this.close = function() {
+        this.close = function () {
           window.removeEventListener('message', receive);
         };
 
-        this.send = function(value, callback) {
+        this.send = function (value, callback) {
           if (waiting === null) {
             waiting = callback;
             popup.window.postMessage(value, popup.origin);
@@ -1033,14 +1033,14 @@ const TrezorConnect = !isBrowser
       }
 
       function ConnectedChannel(p) {
-        const ready = function() {
+        const ready = function () {
           clearTimeout(this.timeout);
           this.popup.onclose = null;
           this.ready = true;
           this.onready();
         }.bind(this);
 
-        const closed = function(blocked) {
+        const closed = function (blocked) {
           clearTimeout(this.timeout);
           this.channel.close();
           if (blocked) {
@@ -1050,7 +1050,7 @@ const TrezorConnect = !isBrowser
           }
         }.bind(this);
 
-        const timedout = function() {
+        const timedout = function () {
           this.popup.onclose = null;
           if (this.popup.window) {
             this.popup.window.close();
@@ -1079,13 +1079,13 @@ const TrezorConnect = !isBrowser
       function PopupManager() {
         let cc = null;
 
-        const closed = function() {
+        const closed = function () {
           cc.channel.respond(new Error(ERR_WINDOW_CLOSED));
           cc.channel.close();
           cc = null;
         };
 
-        const open = function(callback) {
+        const open = function (callback) {
           cc = new ConnectedChannel({
             name: 'trezor-connect',
             width: 600,
@@ -1095,11 +1095,11 @@ const TrezorConnect = !isBrowser
             url: POPUP_URL,
             chromeUrl: CHROME_URL
           });
-          cc.onready = function() {
+          cc.onready = function () {
             cc.popup.onclose = closed;
             callback(cc.channel);
           };
-          cc.onerror = function(error) {
+          cc.onerror = function (error) {
             cc = null;
             callback(error);
           };
@@ -1108,13 +1108,13 @@ const TrezorConnect = !isBrowser
         this.closeAfterSuccess = true;
         this.closeAfterFailure = true;
 
-        this.close = function() {
+        this.close = function () {
           if (cc && cc.popup.window) {
             cc.popup.window.close();
           }
         };
 
-        this.waitForChannel = function(callback) {
+        this.waitForChannel = function (callback) {
           if (cc) {
             if (cc.ready) {
               callback(cc.channel);
@@ -1130,7 +1130,7 @@ const TrezorConnect = !isBrowser
           }
         };
 
-        this.sendWithChannel = function(message, callback) {
+        this.sendWithChannel = function (message, callback) {
           message.bitcoreURLS = this.bitcoreURLS || null;
           message.currency = this.currency || null;
           message.currencyUnits = this.currencyUnits || null;
@@ -1141,7 +1141,7 @@ const TrezorConnect = !isBrowser
           message.accountDiscoveryBip44CoinType =
             this.accountDiscoveryBip44CoinType || null;
 
-          const respond = function(response) {
+          const respond = function (response) {
             const succ = response.success && this.closeAfterSuccess;
             const fail = !response.success && this.closeAfterFailure;
             if (succ || fail) {
@@ -1150,7 +1150,7 @@ const TrezorConnect = !isBrowser
             callback(response);
           }.bind(this);
 
-          const onresponse = function(response) {
+          const onresponse = function (response) {
             if (response instanceof Error) {
               const error = response;
               respond({ success: false, error: error.message });
@@ -1159,7 +1159,7 @@ const TrezorConnect = !isBrowser
             }
           };
 
-          const onchannel = function(channel) {
+          const onchannel = function (channel) {
             if (channel instanceof Error) {
               const error = channel;
               respond({ success: false, error: error.message });

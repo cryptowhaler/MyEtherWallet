@@ -13,17 +13,15 @@
 import * as Crypto from 'crypto';
 import * as HDKey from 'hdkey';
 
-const DigitalBitboxEth = function(comm, sec) {
+const DigitalBitboxEth = function (comm, sec) {
   this.comm = comm;
   DigitalBitboxEth.sec = sec || DigitalBitboxEth.sec;
   this.key = Crypto.createHash('sha256')
     .update(Buffer.from(DigitalBitboxEth.sec, 'utf8'))
     .digest();
-  this.key = Crypto.createHash('sha256')
-    .update(this.key)
-    .digest();
+  this.key = Crypto.createHash('sha256').update(this.key).digest();
   clearTimeout(DigitalBitboxEth.to);
-  DigitalBitboxEth.to = setTimeout(function() {
+  DigitalBitboxEth.to = setTimeout(function () {
     DigitalBitboxEth.sec = '';
   }, 60000);
 };
@@ -31,7 +29,7 @@ const DigitalBitboxEth = function(comm, sec) {
 DigitalBitboxEth.sec = '';
 DigitalBitboxEth.to = null;
 
-DigitalBitboxEth.aes_cbc_b64_decrypt = function(ciphertext, key) {
+DigitalBitboxEth.aes_cbc_b64_decrypt = function (ciphertext, key) {
   let res;
   try {
     const ub64 = Buffer.from(ciphertext, 'base64').toString('binary');
@@ -46,7 +44,7 @@ DigitalBitboxEth.aes_cbc_b64_decrypt = function(ciphertext, key) {
   return res;
 };
 
-DigitalBitboxEth.aes_cbc_b64_encrypt = function(plaintext, key) {
+DigitalBitboxEth.aes_cbc_b64_encrypt = function (plaintext, key) {
   try {
     const iv = Crypto.pseudoRandomBytes(16);
     const cipher = Crypto.createCipheriv('aes-256-cbc', key, iv);
@@ -61,7 +59,7 @@ DigitalBitboxEth.aes_cbc_b64_encrypt = function(plaintext, key) {
   }
 };
 
-DigitalBitboxEth.parseError = function(errObject) {
+DigitalBitboxEth.parseError = function (errObject) {
   const errMsg = {
     err101:
       'The Digital Bitbox is not initialized. First use the <a href="https://digitalbitbox.com/start" target="_blank" rel="noopener noreferrer">Digital Bitbox desktop app</a> to set up a wallet.', // No password set
@@ -78,11 +76,11 @@ DigitalBitboxEth.parseError = function(errObject) {
   return msg;
 };
 
-DigitalBitboxEth.prototype.getAddress = function(path, callback) {
+DigitalBitboxEth.prototype.getAddress = function (path, callback) {
   const self = this;
   let cmd = '{"xpub":"' + path + '"}';
   cmd = DigitalBitboxEth.aes_cbc_b64_encrypt(cmd, this.key);
-  const localCallback = function(response, error) {
+  const localCallback = function (response, error) {
     if (typeof error !== 'undefined') {
       callback(undefined, error);
     } else {
@@ -116,7 +114,7 @@ DigitalBitboxEth.prototype.getAddress = function(path, callback) {
   self.comm.exchange(cmd, localCallback);
 };
 
-DigitalBitboxEth.signGeneric = function(
+DigitalBitboxEth.signGeneric = function (
   self,
   path,
   chainId,
@@ -131,7 +129,7 @@ DigitalBitboxEth.signGeneric = function(
     '"}]}}';
   cmd = DigitalBitboxEth.aes_cbc_b64_encrypt(cmd, self.key);
 
-  const localCallback = function(response, error) {
+  const localCallback = function (response, error) {
     if (typeof error !== 'undefined') {
       callback(undefined, error);
     } else {
@@ -179,13 +177,13 @@ DigitalBitboxEth.signGeneric = function(
   self.comm.exchange(cmd, localCallback);
 };
 
-DigitalBitboxEth.prototype.signTransaction = function(path, eTx, callback) {
+DigitalBitboxEth.prototype.signTransaction = function (path, eTx, callback) {
   const self = this;
   const hashToSign = eTx.hash(false).toString('hex');
   DigitalBitboxEth.signGeneric(self, path, eTx._chainId, hashToSign, callback);
 };
 
-DigitalBitboxEth.prototype.signMessage = function(path, messageHex, callback) {
+DigitalBitboxEth.prototype.signMessage = function (path, messageHex, callback) {
   const self = this;
   const hashToSign = messageHex.toString('hex');
   DigitalBitboxEth.signGeneric(self, path, 0, hashToSign, callback);

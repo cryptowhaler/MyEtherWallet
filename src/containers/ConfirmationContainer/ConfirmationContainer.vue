@@ -12,7 +12,8 @@
       :value="amount"
       :gas="gasLimit"
       :data="data"
-      :nonce="nonce + 1"/>
+      :nonce="nonce + 1"
+    />
     <confirm-modal
       ref="offlineGenerateConfirmModal"
       :confirm-send-tx="generateTx"
@@ -25,7 +26,8 @@
       :value="amount"
       :gas="gasLimit"
       :data="data"
-      :nonce="nonce + 1"/>
+      :nonce="nonce + 1"
+    />
     <confirm-sign-modal
       ref="signConfirmModal"
       :confirm-sign-message="messageReturn"
@@ -35,10 +37,7 @@
       :is-hardware-wallet="isHardwareWallet"
       :from="fromAddress"
     />
-    <success-modal
-      ref="successModal"
-      message=""
-      link-message="Close"/>
+    <success-modal ref="successModal" message="" link-message="Close" />
   </div>
 </template>
 
@@ -60,7 +59,7 @@ export default {
     },
     rawTx: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       }
     }
@@ -113,7 +112,7 @@ export default {
         this.responseFunction = resolve;
         this.successMessage = 'Sending Transaction';
         // this.signer = signer(tx)
-        signer(tx).then(_response => {
+        signer(tx).then((_response) => {
           this.signedTxObject = _response;
           this.signedTx = this.signedTxObject.rawTransaction;
         });
@@ -129,7 +128,7 @@ export default {
         this.responseFunction = resolve;
         this.successMessage = 'Sending Transaction';
         // this.signer = signer(tx)
-        signer(tx).then(_response => {
+        signer(tx).then((_response) => {
           this.signedTxObject = _response;
           this.signedTx = this.signedTxObject.rawTransaction;
         });
@@ -142,7 +141,7 @@ export default {
       (data, isHardware, signer, resolve) => {
         this.responseFunction = resolve;
         this.messageToSign = data;
-        signer(data).then(_response => {
+        signer(data).then((_response) => {
           this.signedMessage = _response;
         });
         // this.signer = signer(data)
@@ -231,5 +230,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

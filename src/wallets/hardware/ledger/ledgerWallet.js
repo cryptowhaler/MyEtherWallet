@@ -220,7 +220,7 @@ export default class LedgerWallet extends HardwareWalletInterface {
         .then(() => {
           this.connectionOpened = false;
         })
-        .catch(error => {
+        .catch((error) => {
           throw error;
         });
     }
@@ -240,7 +240,7 @@ export default class LedgerWallet extends HardwareWalletInterface {
         .then(() => {
           this.connectionOpened = false;
         })
-        .catch(error => {
+        .catch((error) => {
           throw error;
         });
     }
@@ -281,7 +281,7 @@ export default class LedgerWallet extends HardwareWalletInterface {
         .then(() => {
           this.connectionOpened = false;
         })
-        .catch(error => {
+        .catch((error) => {
           throw error;
         });
     }
@@ -339,7 +339,7 @@ export default class LedgerWallet extends HardwareWalletInterface {
         .then(() => {
           this.connectionOpened = false;
         })
-        .catch(error => {
+        .catch((error) => {
           throw error;
         });
     }

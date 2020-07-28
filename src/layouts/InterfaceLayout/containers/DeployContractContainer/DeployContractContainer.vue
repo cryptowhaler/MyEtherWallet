@@ -1,7 +1,7 @@
 <template>
   <div class="deploy-contract-container">
     <!--<success-modal message="" linkMessage="Ok"></success-modal>-->
-    <interface-container-title :title="$t('common.depContract')"/>
+    <interface-container-title :title="$t('common.depContract')" />
 
     <div class="send-form">
       <div class="title-container">
@@ -14,10 +14,7 @@
         </div>
       </div>
       <div class="the-form domain-name">
-        <textarea
-          ref="bytecode"
-          v-model="bytecode"
-          class="custom-textarea-1"/>
+        <textarea ref="bytecode" v-model="bytecode" class="custom-textarea-1" />
       </div>
     </div>
 
@@ -32,39 +29,34 @@
         </div>
       </div>
       <div class="the-form domain-name">
-        <textarea
-          ref="abi"
-          v-model="abi"
-          class="custom-textarea-1"/>
+        <textarea ref="abi" v-model="abi" class="custom-textarea-1" />
         <i
-          :class="[validAbi && validAbi !== ''? '': 'not-good' ,'fa fa-check-circle good-button']"
-          aria-hidden="true"/>
+          :class="[
+            validAbi && validAbi !== '' ? '' : 'not-good',
+            'fa fa-check-circle good-button'
+          ]"
+          aria-hidden="true"
+        />
       </div>
     </div>
 
-    <div
-      v-if="constructors.length !== 0"
-      class="send-form">
+    <div v-if="constructors.length !== 0" class="send-form">
       <div class="title-container">
         <div class="title">
-          <h4>Constructor {{ constructors.length > 1 ? 'Inputs': 'Input' }}: </h4>
+          <h4>
+            Constructor {{ constructors.length > 1 ? 'Inputs' : 'Input' }}:
+          </h4>
         </div>
       </div>
-      <div
-        v-for="(construct, idx) in constructors"
-        :key="construct.type+idx">
-        <div
-          v-for="(input, idx) in construct.inputs"
-          :key="input.name + idx">
+      <div v-for="(construct, idx) in constructors" :key="construct.type + idx">
+        <div v-for="(input, idx) in construct.inputs" :key="input.name + idx">
           <div class="title-container">
             <div class="title">
-              <h5>{{ input.name | capitalize }}: </h5>
+              <h5>{{ input.name | capitalize }}:</h5>
             </div>
           </div>
           <div class="the-form domain-name">
-            <input
-              ref="contractName"
-              v-model="inputs[input.name]">
+            <input ref="contractName" v-model="inputs[input.name]" />
           </div>
         </div>
       </div>
@@ -80,7 +72,8 @@
         <input
           ref="contractName"
           v-model="contractName"
-          :placeholder="contractNamePlaceholder">
+          :placeholder="contractNamePlaceholder"
+        />
       </div>
     </div>
 
@@ -88,25 +81,39 @@
       <div class="title-container">
         <div class="title">
           <div class="title-and-popover">
-            <h4>{{ $t("common.speedTx") }}</h4>
-            <popover :popcontent="$t('popover.whatIsSpeedOfTransactionContent')"/>
+            <h4>{{ $t('common.speedTx') }}</h4>
+            <popover
+              :popcontent="$t('popover.whatIsSpeedOfTransactionContent')"
+            />
           </div>
-          <p>{{ $t("common.txFee") }}: {{ transactionFee }} ETH </p>
+          <p>{{ $t('common.txFee') }}: {{ transactionFee }} ETH</p>
         </div>
         <div class="buttons">
           <div
-            :class="[$store.state.gasPrice === 5 ? 'active': '', 'small-circle-button-green-border']"
-            @click="changeGas(5)">
+            :class="[
+              $store.state.gasPrice === 5 ? 'active' : '',
+              'small-circle-button-green-border'
+            ]"
+            @click="changeGas(5)"
+          >
             {{ $t('common.slow') }}
           </div>
           <div
-            :class="[$store.state.gasPrice === 45 ? 'active': '', 'small-circle-button-green-border']"
-            @click="changeGas(45)">
+            :class="[
+              $store.state.gasPrice === 45 ? 'active' : '',
+              'small-circle-button-green-border'
+            ]"
+            @click="changeGas(45)"
+          >
             {{ $t('common.regular') }}
           </div>
           <div
-            :class="[$store.state.gasPrice === 75 ? 'active': '', 'small-circle-button-green-border']"
-            @click="changeGas(75)">
+            :class="[
+              $store.state.gasPrice === 75 ? 'active' : '',
+              'small-circle-button-green-border'
+            ]"
+            @click="changeGas(75)"
+          >
             {{ $t('common.fast') }}
           </div>
         </div>
@@ -117,12 +124,14 @@
           v-model="gasLimit"
           type="number"
           name=""
-          placeholder="Gas Limit">
+          placeholder="Gas Limit"
+        />
         <div class="good-button-container">
           <p>Gwei</p>
           <i
             class="fa fa-check-circle good-button not-good"
-            aria-hidden="true"/>
+            aria-hidden="true"
+          />
         </div>
       </div>
     </div>
@@ -130,15 +139,20 @@
     <div class="submit-button-container">
       <div class="buttons">
         <div
-          :class="[abi === '' || bytecode === '' || !validAbi ? 'disabled': '', 'submit-button large-round-button-green-filled clickable']"
-          @click="confirmationModalOpen">
+          :class="[
+            abi === '' || bytecode === '' || !validAbi ? 'disabled' : '',
+            'submit-button large-round-button-green-filled clickable'
+          ]"
+          @click="confirmationModalOpen"
+        >
           Sign Transaction
         </div>
       </div>
       <interface-bottom-text
         :link-text="$t('interface.learnMore')"
         :question="$t('interface.haveIssues')"
-        link="/"/>
+        link="/"
+      />
     </div>
     <!--<confirm-modal :showSuccess="showSuccessModal" :signedTx="signedTx" :fee="transactionFee" :gasPrice="$store.state.gasPrice" :from="$store.state.wallet.getAddressString()" :gas="gasLimit" :data="data" :nonce="nonce" :contractName="contractName" :abi="abi"></confirm-modal>-->
     <!--<success-modal message="Sending Transaction" linkMessage="Close"></success-modal>-->
@@ -185,7 +199,7 @@ export default {
       this.constructors = [];
       this.validAbi = Misc.isJson(newVal);
       if (newVal !== '' && this.validAbi) {
-        JSON.parse(newVal).forEach(item => {
+        JSON.parse(newVal).forEach((item) => {
           if (item.type === 'constructor') {
             this.constructors.push(item);
           }
@@ -208,7 +222,7 @@ export default {
     this.constructors = [];
     this.validAbi = Misc.isJson(this.abi);
     if (this.abi !== '' && this.validAbi) {
-      JSON.parse(this.abi && this.validAbi).forEach(item => {
+      JSON.parse(this.abi && this.validAbi).forEach((item) => {
         if (item.type === 'constructor') {
           this.constructors.push(item);
         }
@@ -222,7 +236,7 @@ export default {
       try {
         const web3 = this.$store.state.web3;
         const contract = new web3.eth.Contract(JSON.parse(this.abi));
-        const deployArgs = Object.keys(this.inputs).map(key => {
+        const deployArgs = Object.keys(this.inputs).map((key) => {
           return this.inputs[key];
           // return web3.utils.toHex(this.inputs[key]);
         });
@@ -256,21 +270,21 @@ export default {
 
         await web3.eth
           .sendTransaction(this.raw)
-          .once('transactionHash', hash => {
+          .once('transactionHash', (hash) => {
             this.$store.dispatch('addNotification', [
               fromAddress,
               hash,
               'Transaction Hash: Contract Deploy'
             ]);
           })
-          .on('receipt', res => {
+          .on('receipt', (res) => {
             this.$store.dispatch('addNotification', [
               fromAddress,
               res,
               'Transaction Receipt: Contract Deploy'
             ]);
           })
-          .on('error', err => {
+          .on('error', (err) => {
             // eslint-disable-next-line
             console.error(err); // todo replace with proper error
             this.$store.dispatch('addNotification', [
@@ -298,14 +312,14 @@ export default {
         delete newRaw['nonce'];
         this.$store.state.web3.eth
           .estimateGas(newRaw)
-          .then(res => {
+          .then((res) => {
             this.transactionFee = unit.fromWei(
               unit.toWei(this.$store.state.gasPrice, 'gwei') * res,
               'ether'
             );
             this.gasLimit = res;
           })
-          .catch(err => {
+          .catch((err) => {
             // eslint-disable-next-line no-console
             console.error(err);
           });

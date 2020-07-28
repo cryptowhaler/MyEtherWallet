@@ -187,7 +187,7 @@ export default class MnemonicWallet extends HardwareWalletInterface {
 
   // (Start) Internal methods underlying wallet usage methods
   async _getAccounts(count, offset) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const collect = {};
       if (
         this.addressesToIndexMap[offset] &&

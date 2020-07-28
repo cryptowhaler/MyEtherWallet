@@ -1,9 +1,7 @@
 <template>
   <div class="content-block">
     <div class="icon-block">
-      <img
-        :src="img"
-        class="icon">
+      <img :src="img" class="icon" />
     </div>
     <div class="text-block">
       <h6>{{ title }}</h6>

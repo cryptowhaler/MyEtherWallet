@@ -5,7 +5,8 @@
       hide-footer
       centered
       class="bootstrap-modal-wide confirmation-modal nopadding"
-      title="Confirmation">
+      title="Confirmation"
+    >
       <div class="modal-content qrcode-modal">
         <div class="tx-info">
           <div class="tx-data tx-from">
@@ -16,14 +17,10 @@
               <p>{{ from }}</p>
             </div>
           </div>
-          <div
-            v-show="to !== '' && to !== undefined"
-            class="direction">
-            <img src="~@/assets/images/icons/right-arrow.svg">
+          <div v-show="to !== '' && to !== undefined" class="direction">
+            <img src="~@/assets/images/icons/right-arrow.svg" />
           </div>
-          <div
-            v-show="to !== '' && to !== undefined"
-            class="tx-data tx-to">
+          <div v-show="to !== '' && to !== undefined" class="tx-data tx-to">
             <!-- <img src="~@/assets/images/icons/btc.svg">
             <h3>0.006345 <span>BTC</span></h3> -->
             <div class="address-info">
@@ -39,31 +36,39 @@
               <label class="switch">
                 <input
                   type="checkbox"
-                  @click="modalDetailInformation = !modalDetailInformation" >
-                <span class="slider round"/>
+                  @click="modalDetailInformation = !modalDetailInformation"
+                />
+                <span class="slider round" />
               </label>
             </div>
           </div>
-          <div
-            v-if="modalDetailInformation"
-            class="expended-info">
+          <div v-if="modalDetailInformation" class="expended-info">
             <div class="grid-block">
-              <p>Network</p><p>{{ $store.state.network.type.name }} by {{ $store.state.network.service }}</p>
+              <p>Network</p>
+              <p>
+                {{ $store.state.network.type.name }} by
+                {{ $store.state.network.service }}
+              </p>
             </div>
             <div class="grid-block">
-              <p>Gas Limit</p><p>{{ gas }} wei</p>
+              <p>Gas Limit</p>
+              <p>{{ gas }} wei</p>
             </div>
             <div class="grid-block">
-              <p>Gas Price</p><p>{{ gasPrice }} gwei</p>
+              <p>Gas Price</p>
+              <p>{{ gasPrice }} gwei</p>
             </div>
             <div class="grid-block">
-              <p>Transaction Fee</p><p> {{ fee }} ETH</p>
+              <p>Transaction Fee</p>
+              <p>{{ fee }} ETH</p>
             </div>
             <div class="grid-block">
-              <p>Nonce</p><p>{{ nonce }}</p>
+              <p>Nonce</p>
+              <p>{{ nonce }}</p>
             </div>
             <div class="grid-block">
-              <p>Data</p><p>{{ data }}</p>
+              <p>Data</p>
+              <p>{{ data }}</p>
             </div>
           </div>
         </div>
@@ -73,26 +78,29 @@
             <div class="button-with-helper">
               <div
                 ref="ConfirmAndSendButton"
-                :class="[signedTx !== ''? '': 'disabled','submit-button large-round-button-green-filled clickable']"
-                @click="sendTx">
+                :class="[
+                  signedTx !== '' ? '' : 'disabled',
+                  'submit-button large-round-button-green-filled clickable'
+                ]"
+                @click="sendTx"
+              >
                 Confirm and Send
               </div>
               <div class="tooltip-box-2">
                 <b-btn id="exPopover9">
-                  <img
-                    class="icon"
-                    src="~@/assets/images/icons/qr-code.svg">
+                  <img class="icon" src="~@/assets/images/icons/qr-code.svg" />
                 </b-btn>
                 <b-popover
                   target="exPopover9"
                   triggers="hover focus"
-                  placement="top">
+                  placement="top"
+                >
                   <div class="qrcode-contents">
-                    <p class="qrcode-title">Scan QR code to send/swap instantly</p>
+                    <p class="qrcode-title">
+                      Scan QR code to send/swap instantly
+                    </p>
                     <div class="qrcode-block">
-                      <qrcode
-                        :options="{ size: 100 }"
-                        value="Hello, World!"/>
+                      <qrcode :options="{ size: 100 }" value="Hello, World!" />
                     </div>
                     <p class="qrcode-helper">What is that?</p>
                   </div>
@@ -115,7 +123,7 @@ export default {
   props: {
     confirmSendTx: {
       type: Function,
-      default: function() {}
+      default: function () {}
     },
     fee: {
       type: Number,

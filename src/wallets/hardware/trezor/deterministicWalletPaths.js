@@ -23,7 +23,7 @@ function getDerivationPath(networkName) {
 function buildPathsObject() {
   const paths = {};
 
-  Object.keys(derivationPaths).forEach(key => {
+  Object.keys(derivationPaths).forEach((key) => {
     paths[derivationPaths[key]] = {
       dpath: derivationPaths[key],
       label: nodes[key].name_long

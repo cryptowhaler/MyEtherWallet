@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <header-container/>
-    <router-view/>
-    <footer-container/>
-    <confirmation-container/>
+    <header-container />
+    <router-view />
+    <footer-container />
+    <confirmation-container />
   </div>
 </template>
 
@@ -32,9 +32,7 @@ export default {
         : this.$store.state.Networks['ETH'][3];
     const hostUrl = url.parse(network.url);
     const newWeb3 = new Web3(
-      `${hostUrl.protocol}//${hostUrl.hostname}:${network.port}${
-        hostUrl.pathname
-      }`
+      `${hostUrl.protocol}//${hostUrl.hostname}:${network.port}${hostUrl.pathname}`
     );
     const sideMenu =
       store.get('sideMenu') !== undefined ? store.get('sideMenu') : 'send';

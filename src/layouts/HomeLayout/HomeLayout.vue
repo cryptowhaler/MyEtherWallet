@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <top-banner/>
-    <about/>
-    <faqs/>
-    <news v-show="online"/>
-    <social/>
-    <promo/>
+    <top-banner />
+    <about />
+    <faqs />
+    <news v-show="online" />
+    <social />
+    <promo />
   </div>
 </template>
 

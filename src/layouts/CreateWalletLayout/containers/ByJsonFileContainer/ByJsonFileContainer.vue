@@ -3,32 +3,31 @@
     <success-modal
       message="You have created a wallet successfully"
       link-to="/interface"
-      link-message="Access My Wallet"/>
+      link-message="Access My Wallet"
+    />
     <div class="wrap">
       <div class="page-container">
         <div class="nav-tab-user-input-box">
           <b-tabs>
-            <div class="progress-bar"/>
-            <b-tab
-              title="By JSON File"
-              active>
-
+            <div class="progress-bar" />
+            <b-tab title="By JSON File" active>
               <div class="title-block">
                 <div class="title-popover">
                   <h3>
                     {{ $t('createWallet.byJsonFileSaveKeystore') }}
                   </h3>
-                  <popover :popcontent="$t('popover.whatIsMessageContent')"/>
+                  <popover :popcontent="$t('popover.whatIsMessageContent')" />
                 </div>
               </div>
 
               <div class="contents">
                 <by-json-block
                   v-for="content in contents"
+                  :key="content.title"
                   :img="content.img"
                   :title="content.title"
                   :desc="content.desc"
-                  :key="content.title"/>
+                />
               </div>
 
               <div class="user-input-container">
@@ -36,11 +35,18 @@
                   <div class="user-button">
                     <a
                       :href="walletJson"
-                      :class="[{disable: !downloadable} ,'next-button', 'large-round-button-green-filled']"
-                      :download="name">
-                      <span v-if="downloadable"> {{ $t('createWallet.byJsonFileDownloadKeyFile') }} </span>
+                      :class="[
+                        { disable: !downloadable },
+                        'next-button',
+                        'large-round-button-green-filled'
+                      ]"
+                      :download="name"
+                    >
+                      <span v-if="downloadable">
+                        {{ $t('createWallet.byJsonFileDownloadKeyFile') }}
+                      </span>
                       <div v-if="!downloadable">
-                        <i class="fa fa-spinner fa-lg fa-spin"/>
+                        <i class="fa fa-spinner fa-lg fa-spin" />
                       </div>
                     </a>
                   </div>
@@ -48,12 +54,12 @@
                     <router-link to="/">
                       <img
                         class="icon"
-                        src="~@/assets/images/icons/printer.svg">
+                        src="~@/assets/images/icons/printer.svg"
+                      />
                     </router-link>
                   </div>
                 </div>
               </div>
-
             </b-tab>
           </b-tabs>
         </div>
@@ -117,7 +123,7 @@ export default {
   mounted() {
     const worker = new Worker();
     worker.postMessage({ type: 'createWallet', data: [this.password] });
-    worker.onmessage = e => {
+    worker.onmessage = (e) => {
       const createBlob = (mime, str) => {
         const string = typeof str === 'object' ? JSON.stringify(str) : str;
         if (string === null) return '';
@@ -130,7 +136,7 @@ export default {
       this.walletJson = createBlob('mime', e.data.walletJson);
       this.name = e.data.name.toString();
     };
-    worker.onerror = function() {
+    worker.onerror = function () {
       // eslint-disable-next-line no-console
       console.error('onerror received from worker'); // replace with debugger
     };

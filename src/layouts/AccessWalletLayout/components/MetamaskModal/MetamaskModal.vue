@@ -4,46 +4,47 @@
     :title="$t('accessWallet.accessByMetaMask')"
     hide-footer
     class="bootstrap-modal modal-metamask"
-    centered>
+    centered
+  >
     <div class="modal-multi-icons">
-      <img
-        class="icon"
-        src="~@/assets/images/icons/button-metamask-fox.svg">
-      <img
-        class="icon"
-        src="~@/assets/images/icons/clip.svg">
-      <img
-        class="icon logo-small"
-        src="~@/assets/images/logo-small.png">
+      <img class="icon" src="~@/assets/images/icons/button-metamask-fox.svg" />
+      <img class="icon" src="~@/assets/images/icons/clip.svg" />
+      <img class="icon logo-small" src="~@/assets/images/logo-small.png" />
     </div>
     <div class="d-block content-container text-center">
       <h4>
-        {{ $t("accessWallet.metaMaskModalDesc") }}
+        {{ $t('accessWallet.metaMaskModalDesc') }}
       </h4>
     </div>
     <div class="accept-terms">
-      <label class="checkbox-container">{{ $t("accessWallet.acceptTerms") }} <a href="/">{{ $t("common.terms") }}</a>.
+      <label class="checkbox-container"
+        >{{ $t('accessWallet.acceptTerms') }}
+        <a href="/">{{ $t('common.terms') }}</a
+        >.
         <input
           type="checkbox"
-          @click="accessMyWalletBtnDisabled = !accessMyWalletBtnDisabled" >
-        <span class="checkmark"/>
+          @click="accessMyWalletBtnDisabled = !accessMyWalletBtnDisabled"
+        />
+        <span class="checkmark" />
       </label>
     </div>
     <div class="button-container">
       <router-link to="interface">
         <b-btn
           :disabled="accessMyWalletBtnDisabled"
-          class="mid-round-button-green-filled close-button">
-          {{ $t("accessWallet.accessMyWallet") }}
+          class="mid-round-button-green-filled close-button"
+        >
+          {{ $t('accessWallet.accessMyWallet') }}
         </b-btn>
       </router-link>
       <b-btn
         :disabled="accessMyWalletBtnDisabled"
-        class="mid-round-button-green-filled close-button">
-        {{ $t("accessWallet.accessMyWallet") }}
+        class="mid-round-button-green-filled close-button"
+      >
+        {{ $t('accessWallet.accessMyWallet') }}
       </b-btn>
     </div>
-    <customer-support/>
+    <customer-support />
   </b-modal>
 </template>
 
@@ -57,7 +58,7 @@ export default {
   props: {
     networkAndAddressOpen: {
       type: Function,
-      default: function() {}
+      default: function () {}
     }
   },
   data() {

@@ -1,33 +1,51 @@
 <template>
   <div>
-    <interface-network-modal/>
+    <interface-network-modal />
     <div @click="networkModalOpen">
       <div class="info-block network">
         <div class="block-image">
           <img
-            v-if="$store.state.network.type.name === 'ROP' || $store.state.network.type.name === 'RIN' || $store.state.network.type.name === 'KOV'"
+            v-if="
+              $store.state.network.type.name === 'ROP' ||
+              $store.state.network.type.name === 'RIN' ||
+              $store.state.network.type.name === 'KOV'
+            "
             class="icon"
-            src="~@/assets/images/icons/network.svg">
+            src="~@/assets/images/icons/network.svg"
+          />
           <img
             v-else
-            :src="require(`@/assets/images/networks/${$store.state.network.type.name.toLowerCase()}.svg`)"
-            class="icon">
+            :src="
+              require(`@/assets/images/networks/${$store.state.network.type.name.toLowerCase()}.svg`)
+            "
+            class="icon"
+          />
         </div>
         <div class="block-content">
           <div class="helper">
             <popover
               :popcontent="$t('popover.whatIsMessageContent')"
-              :popovertype="'A'" />
+              :popovertype="'A'"
+            />
           </div>
           <div class="information-container">
-            <h2>{{ $t("interface.txNetworkTitle") }}</h2>
-            <p>{{ $store.state.network.service+"("+$store.state.network.type.name+")" }}</p>
-            <p>Last Block#: <span v-show="parsedNetwork !== ''"> {{ parsedNetwork }}</span> <i
-              v-show="parsedNetwork === ''"
-              class="fa fa-spinner fa-spin"/> </p>
+            <h2>{{ $t('interface.txNetworkTitle') }}</h2>
+            <p>
+              {{
+                $store.state.network.service +
+                '(' +
+                $store.state.network.type.name +
+                ')'
+              }}
+            </p>
+            <p>
+              Last Block#:
+              <span v-show="parsedNetwork !== ''"> {{ parsedNetwork }}</span>
+              <i v-show="parsedNetwork === ''" class="fa fa-spinner fa-spin" />
+            </p>
           </div>
           <div class="icon-container">
-            <img src="~@/assets/images/icons/change.svg">
+            <img src="~@/assets/images/icons/change.svg" />
           </div>
         </div>
       </div>

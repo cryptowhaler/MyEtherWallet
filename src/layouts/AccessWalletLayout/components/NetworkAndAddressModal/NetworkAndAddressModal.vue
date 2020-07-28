@@ -4,7 +4,8 @@
     :title="$t('accessWallet.networkAndAddress')"
     hide-footer
     class="bootstrap-modal modal-network-and-address"
-    centered>
+    centered
+  >
     <!-- Derivation Path Drop down-->
     <div class="content-container-1">
       <div class="hd-derivation">
@@ -13,23 +14,26 @@
           <b-dropdown
             id="hd-derivation-path"
             :text="selecteDPath.dpath"
-            class="dropdown-button-2">
+            class="dropdown-button-2"
+          >
             <b-dropdown-item
               v-for="(val, key) in availablePaths"
-              :class="selecteDPath.dpath === val.dpath ? 'active' : ''"
               :key="'base' + key"
-              @click="selectDPath(key)">
+              :class="selecteDPath.dpath === val.dpath ? 'active' : ''"
+              @click="selectDPath(key)"
+            >
               {{ val.dpath }}
             </b-dropdown-item>
-            <b-dropdown-divider/>
+            <b-dropdown-divider />
             <b-dropdown-item>
               {{ $t('accessWallet.customPaths') }}
             </b-dropdown-item>
             <b-dropdown-item
               v-for="(val, key) in customPaths"
-              :class="selecteDPath.dpath === val.dpath ? 'active' : ''"
               :key="key"
-              @click="selectDPath(key)">
+              :class="selecteDPath.dpath === val.dpath ? 'active' : ''"
+              @click="selectDPath(key)"
+            >
               {{ val.dpath }}
             </b-dropdown-item>
             <b-dropdown-item @click="showCustomPathInput">
@@ -38,26 +42,26 @@
           </b-dropdown>
         </div>
       </div>
-      <p
-        v-show="invalidPath !== ''"
-        class="error-message-container">
+      <p v-show="invalidPath !== ''" class="error-message-container">
         The path {{ invalidPath }} is not valid for this device
       </p>
-      <p
-        v-show="!customPathInput"
-        class="derivation-brands">{{ selecteDPath.label }}</p>
+      <p v-show="!customPathInput" class="derivation-brands">
+        {{ selecteDPath.label }}
+      </p>
       <div v-show="customPathInput">
         <!-- TODO: how to structure the path input? -->
         <input
           id="customPathLabel"
           v-model="customPath.label"
-          placeholder="my custom path">
-        <br>
+          placeholder="my custom path"
+        />
+        <br />
         <input
           id="customPathInput"
           v-model="customPath.dpath"
-          placeholder="m/44'/1'/0'/0">
-        <br>
+          placeholder="m/44'/1'/0'/0"
+        />
+        <br />
         <button @click="addCustomPath">addCustomPath</button>
         <button @click="showCustomPathInput">cancel</button>
       </div>
@@ -73,16 +77,17 @@
           <li>{{ $t('accessWallet.id') }}</li>
           <li>{{ $t('common.address') }}</li>
           <li>{{ $t('common.balance') }}</li>
-          <li/>
+          <li />
         </ul>
 
         <ul
           v-for="(details, index) in orderedAddresses"
-          :data-address="'address' + index"
           :key="index"
+          :data-address="'address' + index"
           :class="selectedId === 'address' + index ? 'selected' : ''"
           class="address-block address-data"
-          @click="setAddress(details, 'address' + index)">
+          @click="setAddress(details, 'address' + index)"
+        >
           <li>{{ details.index + 1 }}.</li>
           <li>{{ details.address }}</li>
           <li>{{ details.balance }} ETH</li>
@@ -91,50 +96,56 @@
               <input
                 :id="'address' + index"
                 type="checkbox"
-                @click="unselectAllAddresses">
-              <span class="checkmark checkmark-small"/>
+                @click="unselectAllAddresses"
+              />
+              <span class="checkmark checkmark-small" />
             </label>
           </li>
         </ul>
-
-      </div> <!-- .address-block-container -->
+      </div>
+      <!-- .address-block-container -->
 
       <div class="address-nav">
-        <span
-          v-show="!connectionActive"
-          @click="priorAddressSet()">&lt; {{ $t('common.previous') }}</span>
-        <span
-          v-show="!connectionActive"
-          @click="nextAddressSet()">{{ $t('common.next') }} &gt;</span>
+        <span v-show="!connectionActive" @click="priorAddressSet()"
+          >&lt; {{ $t('common.previous') }}</span
+        >
+        <span v-show="!connectionActive" @click="nextAddressSet()"
+          >{{ $t('common.next') }} &gt;</span
+        >
         <!-- Probably will need to restructure a bit to allow back browsing while new addresses are retrieved-->
-        <span
-          v-show="connectionActive"
-          class="activeConn">&lt; {{ $t('common.previous') }}</span>
-        <span
-          v-show="connectionActive"
-          class="activeConn">{{ $t('common.next') }} &gt;</span>
+        <span v-show="connectionActive" class="activeConn"
+          >&lt; {{ $t('common.previous') }}</span
+        >
+        <span v-show="connectionActive" class="activeConn"
+          >{{ $t('common.next') }} &gt;</span
+        >
       </div>
-    </div> <!-- .content-container-2 -->
+    </div>
+    <!-- .content-container-2 -->
 
     <div class="accept-terms">
-      <label class="checkbox-container">{{ $t('accessWallet.acceptTerms') }}
-        <a href="/">{{ $t('common.terms') }}</a>.
+      <label class="checkbox-container"
+        >{{ $t('accessWallet.acceptTerms') }}
+        <a href="/">{{ $t('common.terms') }}</a
+        >.
         <input
           ref="accessMyWalletBtn"
           type="checkbox"
-          @click="accessMyWalletBtnDisabled = !accessMyWalletBtnDisabled">
-        <span class="checkmark"/>
+          @click="accessMyWalletBtnDisabled = !accessMyWalletBtnDisabled"
+        />
+        <span class="checkmark" />
       </label>
     </div>
     <div class="button-container">
       <b-btn
         :disabled="accessMyWalletBtnDisabled"
         class="mid-round-button-green-filled close-button"
-        @click.prevent="unlockWallet">
-        {{ $t("common.accessMyWallet") }}
+        @click.prevent="unlockWallet"
+      >
+        {{ $t('common.accessMyWallet') }}
       </b-btn>
     </div>
-    <customer-support/>
+    <customer-support />
   </b-modal>
 </template>
 
@@ -149,7 +160,7 @@ export default {
   props: {
     hardwareWallet: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       }
     }
@@ -184,7 +195,7 @@ export default {
   watch: {
     hardwareWallet() {
       this.getPaths();
-      this.getAddresses(this.count, this.offset).then(addressSet => {
+      this.getAddresses(this.count, this.offset).then((addressSet) => {
         this.displayAddresses = addressSet;
       });
     }
@@ -209,10 +220,10 @@ export default {
       b = b.index + 1;
       return a < b ? -1 : a > b ? 1 : 0;
     },
-    unselectAllAddresses: function(selected) {
+    unselectAllAddresses: function (selected) {
       document
         .querySelectorAll('.user-input-checkbox input')
-        .forEach(function(el) {
+        .forEach(function (el) {
           el.checked = el.id === selected;
         });
     },
@@ -250,11 +261,11 @@ export default {
         .then(() => {
           this.selecteDPath = this.availablePaths[key];
           this.invalidPath = '';
-          this.getAddresses().then(addressSet => {
+          this.getAddresses().then((addressSet) => {
             this.displayAddresses = addressSet;
           });
         })
-        .catch(_error => {
+        .catch((_error) => {
           // If not a valid path Inform the user
           this.invalidPath = this.availablePaths[key].dpath;
           // eslint-disable-next-line no-console
@@ -294,11 +305,11 @@ export default {
         );
       } else if (this.currentIndex + this.count === this.maxIndex) {
         this.currentIndex = this.currentIndex + this.count;
-        this.getAddresses(this.count, this.currentIndex).then(addressSet => {
+        this.getAddresses(this.count, this.currentIndex).then((addressSet) => {
           this.displayAddresses = addressSet;
         });
       } else {
-        this.getAddresses(this.count, this.currentIndex).then(addressSet => {
+        this.getAddresses(this.count, this.currentIndex).then((addressSet) => {
           this.displayAddresses = addressSet;
         });
       }
@@ -311,7 +322,7 @@ export default {
           const hardwareAddresses = [];
           this.hardwareWallet
             .getMultipleAccounts(count, offset)
-            .then(_accounts => {
+            .then((_accounts) => {
               Object.values(_accounts).forEach(async (address, i) => {
                 const rawBalance = await this.$store.state.web3.eth.getBalance(
                   address
@@ -332,7 +343,7 @@ export default {
               this.connectionActive = !this.connectionActive;
               resolve(hardwareAddresses);
             })
-            .catch(error => {
+            .catch((error) => {
               // eslint-disable-next-line no-console
               console.error(error);
               reject(error);

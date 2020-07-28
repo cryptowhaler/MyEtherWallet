@@ -1,29 +1,49 @@
 <template lang="html">
-  <div
-    v-click-outside="openDropdown"
-    class="currency-picker-container">
+  <div v-click-outside="openDropdown" class="currency-picker-container">
     <div>
       <div
-        :class="[open? 'open':'','dropdown-container', token? 'dropdown-text-container': 'dropdown-text-container-white']"
-        @click="openDropdown">
-        <p v-show="token"> {{ selectedCurrency.symbol }} <span class="subname">- {{ selectedCurrency.name }}</span></p>
-        <p v-show="!token"> {{ selectedCurrency.name }} </p>
-        <i :class="['fa', open ? 'fa-angle-up':'fa-angle-down']"/>
+        :class="[
+          open ? 'open' : '',
+          'dropdown-container',
+          token ? 'dropdown-text-container' : 'dropdown-text-container-white'
+        ]"
+        @click="openDropdown"
+      >
+        <p v-show="token">
+          {{ selectedCurrency.symbol }}
+          <span class="subname">- {{ selectedCurrency.name }}</span>
+        </p>
+        <p v-show="!token">{{ selectedCurrency.name }}</p>
+        <i :class="['fa', open ? 'fa-angle-up' : 'fa-angle-down']" />
       </div>
-      <div :class="[open? 'open':'hide', 'dropdown-item-container']">
+      <div :class="[open ? 'open' : 'hide', 'dropdown-item-container']">
         <div class="dropdown-search-container">
-          <input
-            v-model="search"
-            placeholder="Search">
-          <i class="fa fa-search"/>
+          <input v-model="search" placeholder="Search" />
+          <i class="fa fa-search" />
         </div>
         <div class="item-container">
           <div
             v-for="(curr, idx) in localCurrency"
-            :class="[token ? selectedCurrency.symbol === curr.symbol ? 'selected': '' : selectedCurrency.name === curr.name? 'selected': '','item']"
-            :key="token?curr.name+curr.symbol + page: curr.name + page + idx"
-            @click="selectCurrency(curr)">
-            <p v-show="token">{{ curr.symbol }} <span class="subname">- {{ curr.name }}</span></p><p/><p v-show="!token">{{ curr.name }}</p>
+            :key="
+              token ? curr.name + curr.symbol + page : curr.name + page + idx
+            "
+            :class="[
+              token
+                ? selectedCurrency.symbol === curr.symbol
+                  ? 'selected'
+                  : ''
+                : selectedCurrency.name === curr.name
+                ? 'selected'
+                : '',
+              'item'
+            ]"
+            @click="selectCurrency(curr)"
+          >
+            <p v-show="token">
+              {{ curr.symbol }} <span class="subname">- {{ curr.name }}</span>
+            </p>
+            <p />
+            <p v-show="!token">{{ curr.name }}</p>
           </div>
         </div>
       </div>
@@ -36,7 +56,7 @@ export default {
   props: {
     currency: {
       type: Array,
-      default: function() {
+      default: function () {
         return [];
       }
     },
@@ -75,11 +95,11 @@ export default {
       } else {
         this.localCurrency = [{ name: 'Select an item' }];
       }
-      newVal.forEach(curr => this.localCurrency.push(curr));
+      newVal.forEach((curr) => this.localCurrency.push(curr));
     },
     search(newVal) {
       if (newVal !== '') {
-        this.localCurrency = this.localCurrency.filter(curr => {
+        this.localCurrency = this.localCurrency.filter((curr) => {
           if (curr.name.toLowerCase().includes(newVal.toLowerCase())) {
             return curr;
           }
@@ -92,13 +112,13 @@ export default {
             { name: 'Select an item', abi: '', address: '' }
           ];
         }
-        this.currency.forEach(curr => this.localCurrency.push(curr));
+        this.currency.forEach((curr) => this.localCurrency.push(curr));
       }
     }
   },
   mounted() {
     if (this.currency) {
-      this.currency.forEach(curr => this.localCurrency.push(curr));
+      this.currency.forEach((curr) => this.localCurrency.push(curr));
     }
   },
   methods: {

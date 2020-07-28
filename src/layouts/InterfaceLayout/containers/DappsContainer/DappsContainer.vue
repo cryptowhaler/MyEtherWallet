@@ -1,23 +1,26 @@
 <template>
   <div class="dapps-container">
     <div v-show="selectedDapp === ''">
-      <interface-container-title :title="$t('common.dapps')"/>
+      <interface-container-title :title="$t('common.dapps')" />
       <div class="buttons-container">
-        <dapp-buttons 
-          v-for="dapp in dapps" 
-          :key="dapp.title" 
-          :title="dapp.title" 
-          :icon="dapp.icon" 
-          :desc="dapp.desc" 
-          @click="switchView(dapp.param)"/>
+        <dapp-buttons
+          v-for="dapp in dapps"
+          :key="dapp.title"
+          :title="dapp.title"
+          :icon="dapp.icon"
+          :desc="dapp.desc"
+          @click="switchView(dapp.param)"
+        />
       </div>
     </div>
-    <register-domain-container 
-      v-show="selectedDapp === 'register-domain'" 
-      :reset-view="switchView"/>
-    <domain-sale-container 
-      v-show="selectedDapp === 'domain-sale'" 
-      :reset-view="switchView"/>
+    <register-domain-container
+      v-show="selectedDapp === 'register-domain'"
+      :reset-view="switchView"
+    />
+    <domain-sale-container
+      v-show="selectedDapp === 'domain-sale'"
+      :reset-view="switchView"
+    />
   </div>
 </template>
 

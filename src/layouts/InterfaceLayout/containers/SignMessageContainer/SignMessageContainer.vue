@@ -1,30 +1,23 @@
 <template>
   <div class="deploy-contract-container">
-    <success-modal
-      message=""
-      link-message="Ok"/>
-    <interface-container-title :title="$t('common.signMessage')"/>
+    <success-modal message="" link-message="Ok" />
+    <interface-container-title :title="$t('common.signMessage')" />
     <div class="send-form">
       <p>
-        Include your nickname and where
-        you use the nickname so someone
-        else cannot use it.
-        Include a specific reason
-        for the message so it cannot be
+        Include your nickname and where you use the nickname so someone else
+        cannot use it. Include a specific reason for the message so it cannot be
         reused for a different purpose.
       </p>
 
       <div class="title-container">
         <div class="title">
           <h4>Message</h4>
-          <popover :popcontent="$t('popover.whatIsMessageContent')"/>
+          <popover :popcontent="$t('popover.whatIsMessageContent')" />
         </div>
       </div>
 
       <div class="the-form">
-        <textarea
-          ref="message"
-          class="custom-textarea-1"/>
+        <textarea ref="message" class="custom-textarea-1" />
       </div>
     </div>
 
@@ -32,20 +25,16 @@
       <div class="title-container">
         <div class="title">
           <h4>Signature</h4>
-          <popover :popcontent="$t('popover.whatIsSignatureContent')"/>
+          <popover :popcontent="$t('popover.whatIsSignatureContent')" />
 
           <div class="copy-buttons">
             <span @click="deleteInputText('signature')">Clear</span>
             <span @click="copyToClipboard('signature')">Copy</span>
           </div>
-
         </div>
       </div>
       <div class="the-form domain-name">
-        <textarea
-          ref="signature"
-          class="custom-textarea-1"
-          name=""/>
+        <textarea ref="signature" class="custom-textarea-1" name="" />
       </div>
     </div>
 
@@ -53,16 +42,17 @@
       <div class="buttons">
         <div
           class="submit-button large-round-button-green-filled clickable"
-          @click="signMessage">
+          @click="signMessage"
+        >
           {{ $t('Sign') }}
         </div>
       </div>
       <interface-bottom-text
         :link-text="$t('interface.learnMore')"
         :question="$t('interface.haveIssues')"
-        link="/"/>
+        link="/"
+      />
     </div>
-
   </div>
 </template>
 
@@ -88,7 +78,7 @@ export default {
           this.$refs.message.value,
           this.$store.state.wallet.getAddressString()
         )
-        .then(_signedMessage => {
+        .then((_signedMessage) => {
           this.$refs.signature.value = JSON.stringify(
             {
               address: this.$store.state.wallet.getAddressString(),

@@ -3,7 +3,7 @@ export default function web3OverideMew(web3, wallet, eventHub) {
 
   const methodOverides = {
     signTransaction(tx) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         if (tx.generateOnly) {
           delete tx['generateOnly'];
           eventHub.$emit(
@@ -11,7 +11,7 @@ export default function web3OverideMew(web3, wallet, eventHub) {
             tx,
             wallet.isHardware,
             wallet.signTransaction.bind(this),
-            res => {
+            (res) => {
               resolve(res);
             }
           );
@@ -21,7 +21,7 @@ export default function web3OverideMew(web3, wallet, eventHub) {
             tx,
             wallet.isHardware,
             wallet.signTransaction.bind(this),
-            res => {
+            (res) => {
               resolve(res);
             }
           );
@@ -29,13 +29,13 @@ export default function web3OverideMew(web3, wallet, eventHub) {
       });
     },
     signMessage(message) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         eventHub.$emit(
           'showMessageConfirmModal',
           message,
           wallet.isHardware,
           wallet.signMessage,
-          res => {
+          (res) => {
             resolve(res);
           }
         );

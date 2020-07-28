@@ -143,7 +143,7 @@ export default class DigitalBitboxWallet extends HardwareWalletInterface {
   }
 
   unlockBitbox(digitalBitboxSecret) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.transport = new DigitalBitboxUsb();
       const app = new DigitalBitboxEth(this.transport, digitalBitboxSecret);
       const path = this.path;
@@ -219,7 +219,7 @@ export default class DigitalBitboxWallet extends HardwareWalletInterface {
 
   // (Start) Internal methods underlying wallet usage methods
   async _getAccounts(count, offset) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const collect = {};
       if (
         this.addressesToIndexMap[offset] &&

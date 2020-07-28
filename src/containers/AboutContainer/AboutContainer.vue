@@ -3,25 +3,21 @@
     <div class="wrap">
       <div class="top-section">
         <div class="circle">
-          <img src="~@/assets/images/home/circle.png">
+          <img src="~@/assets/images/home/circle.png" />
         </div>
-        <div
-          id="about-mew"
-          class="star-background">
+        <div id="about-mew" class="star-background">
           <div class="page-container">
             <div class="flex-col-1-1-vertical-center content">
               <div class="text-content">
-                <h2>{{ $t("home.aboutTitle") }}</h2>
+                <h2>{{ $t('home.aboutTitle') }}</h2>
                 <p class="color-white">
-                  {{ $t("home.aboutSubheading") }}
+                  {{ $t('home.aboutSubheading') }}
                 </p>
                 <div class="watch-video">
                   <router-link to="/">
                     <p>
-                      {{ $t("home.aboutWatchVideo") }}
-                      <i
-                        class="fa fa-caret-right"
-                        aria-hidden="true"/>
+                      {{ $t('home.aboutWatchVideo') }}
+                      <i class="fa fa-caret-right" aria-hidden="true" />
                     </p>
                   </router-link>
                 </div>
@@ -29,10 +25,12 @@
               <div class="image-content">
                 <img
                   class="spaceman"
-                  src="~@/assets/images/home/spaceman.png">
+                  src="~@/assets/images/home/spaceman.png"
+                />
                 <img
                   class="mew-icon"
-                  src="~@/assets/images/home/mew-icon.png">
+                  src="~@/assets/images/home/mew-icon.png"
+                />
               </div>
             </div>
           </div>
@@ -43,45 +41,45 @@
           <div class="grid-col-2 mew-features">
             <dir class="content">
               <div class="image">
-                <img src="~@/assets/images/home/icon-wallet.svg">
+                <img src="~@/assets/images/home/icon-wallet.svg" />
               </div>
               <div class="text">
-                <h3>{{ $t("home.aboutMewWallet") }}</h3>
+                <h3>{{ $t('home.aboutMewWallet') }}</h3>
                 <p>
-                  {{ $t("home.aboutMewWalletDesc") }}
+                  {{ $t('home.aboutMewWalletDesc') }}
                 </p>
               </div>
             </dir>
             <dir class="content">
               <div class="image">
-                <img src="~@/assets/images/home/icon-hardware.svg">
+                <img src="~@/assets/images/home/icon-hardware.svg" />
               </div>
               <div class="text">
-                <h3>{{ $t("home.aboutHardwareWallet") }}</h3>
+                <h3>{{ $t('home.aboutHardwareWallet') }}</h3>
                 <p>
-                  {{ $t("home.aboutHardwareWalletDesc") }}
+                  {{ $t('home.aboutHardwareWalletDesc') }}
                 </p>
               </div>
             </dir>
             <dir class="content">
               <div class="image">
-                <img src="~@/assets/images/home/icon-swap.svg">
+                <img src="~@/assets/images/home/icon-swap.svg" />
               </div>
               <div class="text">
-                <h3>{{ $t("common.swap") }}</h3>
+                <h3>{{ $t('common.swap') }}</h3>
                 <p>
-                  {{ $t("home.aboutSwapDesc") }}
+                  {{ $t('home.aboutSwapDesc') }}
                 </p>
               </div>
             </dir>
             <dir class="content">
               <div class="image">
-                <img src="~@/assets/images/home/icon-mew-connect.svg">
+                <img src="~@/assets/images/home/icon-mew-connect.svg" />
               </div>
               <div class="text">
                 <h3>{{ $t('common.mewConnect') }}</h3>
                 <p>
-                  {{ $t("home.aboutMewConnectDesc") }}
+                  {{ $t('home.aboutMewConnectDesc') }}
                 </p>
               </div>
             </dir>

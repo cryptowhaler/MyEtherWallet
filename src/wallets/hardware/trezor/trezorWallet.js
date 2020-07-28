@@ -151,11 +151,11 @@ export default class TrezorWallet extends HardwareWalletInterface {
   }
 
   unlockTrezor() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       // trezor is using the path without change level id
       TrezorConnect.getXPubKey(
         this.path,
-        response => {
+        (response) => {
           resolve(this.trezorCallback(response));
         },
         '1.5.2'
@@ -214,7 +214,7 @@ export default class TrezorWallet extends HardwareWalletInterface {
 
   // (Start) Internal methods underlying wallet usage methods
   async _getAccounts(count, offset) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const collect = {};
       if (
         this.addressesToIndexMap[offset] &&
@@ -255,7 +255,7 @@ export default class TrezorWallet extends HardwareWalletInterface {
 
   signTxTrezor(rawTx) {
     return new Promise((resolve, reject) => {
-      const trezorConnectSignCallback = result => {
+      const trezorConnectSignCallback = (result) => {
         if (!result.success) {
           reject(Error(result.error));
           return;
@@ -308,7 +308,7 @@ export default class TrezorWallet extends HardwareWalletInterface {
 
   signMessageTrezor(stringMessage) {
     return new Promise((resolve, reject) => {
-      const localCallback = function(result) {
+      const localCallback = function (result) {
         if (!result.success) {
           reject(result.error);
           return;

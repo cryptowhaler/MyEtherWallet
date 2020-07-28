@@ -7,22 +7,20 @@
             <option
               v-for="data in leftDropDown"
               :key="data.key"
-              value="data.value">{{ data.label }}
+              value="data.value"
+              >{{ data.label }}
             </option>
           </select>
           <p class="select-down-arrow">⌄</p>
         </div>
         <div>
-          <input
-            type="text"
-            name=""
-            placeholder="Amount">
+          <input type="text" name="" placeholder="Amount" />
         </div>
       </div>
 
       <div class="block-center">
         <div class="convert-icon">
-          <img src="~@/assets/images/icons/swap.svg">
+          <img src="~@/assets/images/icons/swap.svg" />
         </div>
       </div>
 
@@ -32,16 +30,14 @@
             <option
               v-for="data in rightDropDown"
               :key="data.key"
-              value="data.value">{{ data.label }}
+              value="data.value"
+              >{{ data.label }}
             </option>
           </select>
           <p class="select-down-arrow">⌄</p>
         </div>
         <div>
-          <input
-            type="text"
-            name=""
-            placeholder="Amount">
+          <input type="text" name="" placeholder="Amount" />
         </div>
       </div>
     </div>

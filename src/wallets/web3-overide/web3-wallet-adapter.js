@@ -132,10 +132,10 @@ export default class Web3WalletAdapter {
       tx.value = tx.value || '0x';
       this.wallet
         .signTransaction(tx)
-        .then(_result => {
+        .then((_result) => {
           resolve(_result);
         })
-        .catch(_error => {
+        .catch((_error) => {
           // eslint-disable-next-line
           console.error(_error);
           reject(_error);
@@ -150,10 +150,10 @@ export default class Web3WalletAdapter {
         msgData.from = this.wallet.getAddressString(); // ledgerWallet checks to see that the address is from the ledger
       this.wallet
         .signMessage(msgData)
-        .then(_signedMessage => {
+        .then((_signedMessage) => {
           resolve(_signedMessage);
         })
-        .catch(_error => {
+        .catch((_error) => {
           reject(_error);
         });
     });
@@ -164,8 +164,8 @@ export default class Web3WalletAdapter {
   privateKeyAvailable() {
     return (
       this.wallet.privateKey &&
-      (typeof this.wallet.privateKey !== 'undefined' &&
-        this.wallet.privateKey !== null)
+      typeof this.wallet.privateKey !== 'undefined' &&
+      this.wallet.privateKey !== null
     );
   }
   // ============== (End) Utility Methods ======================

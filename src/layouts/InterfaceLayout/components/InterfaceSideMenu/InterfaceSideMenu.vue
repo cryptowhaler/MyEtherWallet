@@ -92,23 +92,24 @@
         <li
           v-for="(tab, idx) in tabData"
           :key="tab.title + idx + tab.caret"
-          @click.prevent="tab.click">
+          @click.prevent="tab.click"
+        >
           <div :class="[tab.isActive ? 'active' : '', 'menu-group-title']">
-            <img :src="tab.iconSrc">
+            <img :src="tab.iconSrc" />
             <p>{{ tab.title }}</p>
             <i
               v-show="tab.hasOwnProperty('caret')"
-              :class="['fa', tab.caret ? 'fa-angle-up':'fa-angle-down']"
-              aria-hidden="true"/>
+              :class="['fa', tab.caret ? 'fa-angle-up' : 'fa-angle-down']"
+              aria-hidden="true"
+            />
           </div>
-          <ul
-            v-show="tab.caret"
-            v-if="tab.hasOwnProperty('caret')">
+          <ul v-show="tab.caret" v-if="tab.hasOwnProperty('caret')">
             <li
               v-for="(content, idx) in tab.contents"
               :key="content.itemTitle + idx"
-              :class="content.itemActive? 'active': ''"
-              @click.prevent="content.itemClick">
+              :class="content.itemActive ? 'active' : ''"
+              @click.prevent="content.itemClick"
+            >
               {{ content.itemTitle }}
             </li>
           </ul>
@@ -128,7 +129,7 @@ export default {
     },
     switchTabs: {
       type: Function,
-      default: function() {}
+      default: function () {}
     }
   },
   data() {
@@ -139,7 +140,7 @@ export default {
       showMessage: false,
       tabData: [
         {
-          click: function() {
+          click: function () {
             self.toggle('openSend');
           },
           isActive: self.currentTab === 'send' || self.currentTab === 'offline',
@@ -153,14 +154,14 @@ export default {
             {
               itemActive: self.currentTab === 'send',
               itemTitle: self.$t('common.sendTx'),
-              itemClick: function() {
+              itemClick: function () {
                 self.switchTabs('send');
               }
             },
             {
               itemActive: self.currentTab === 'offline',
               itemTitle: self.$t('common.offline'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('offline');
               }
@@ -168,7 +169,7 @@ export default {
           ]
         },
         {
-          click: function() {
+          click: function () {
             self.switchTabs('swap');
           },
           isActive: self.currentTab === 'swap',
@@ -179,7 +180,7 @@ export default {
           title: self.$t('common.swap')
         },
         {
-          click: function() {
+          click: function () {
             self.switchTabs('dapps');
           },
           isActive: self.currentTab === 'dapps',
@@ -190,7 +191,7 @@ export default {
           title: self.$t('common.dapps')
         },
         {
-          click: function() {
+          click: function () {
             self.toggle('openContract');
           },
           isActive:
@@ -205,7 +206,7 @@ export default {
             {
               itemActive: self.currentTab === 'interactC',
               itemTitle: self.$t('common.interactWcontract'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('interactC');
               }
@@ -213,7 +214,7 @@ export default {
             {
               itemActive: self.currentTab === 'deployC',
               itemTitle: self.$t('common.depContract'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('deployC');
               }
@@ -221,7 +222,7 @@ export default {
           ]
         },
         {
-          click: function() {
+          click: function () {
             self.toggle('openMessage');
           },
           isActive:
@@ -238,7 +239,7 @@ export default {
             {
               itemActive: self.currentTab === 'signMessage',
               itemTitle: self.$t('common.signMessage'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('signMessage');
               }
@@ -246,7 +247,7 @@ export default {
             {
               itemActive: self.currentTab === 'verifyMessage',
               itemTitle: self.$t('common.verifyMessage'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('verifyMessage');
               }
@@ -315,7 +316,7 @@ export default {
       this.updateTabData();
     },
     tabData: {
-      handler: function(newVal) {
+      handler: function (newVal) {
         this.tabData = newVal;
       },
       deep: true
@@ -326,7 +327,7 @@ export default {
       const self = this;
       this.tabData = [
         {
-          click: function() {
+          click: function () {
             self.toggle('openSend');
           },
           isActive: self.currentTab === 'send' || self.currentTab === 'offline',
@@ -340,7 +341,7 @@ export default {
             {
               itemActive: self.currentTab === 'send',
               itemTitle: self.$t('common.sendTx'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('send');
               }
@@ -348,7 +349,7 @@ export default {
             {
               itemActive: self.currentTab === 'offline',
               itemTitle: self.$t('common.offline'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('offline');
               }
@@ -356,7 +357,7 @@ export default {
           ]
         },
         {
-          click: function() {
+          click: function () {
             self.showSend = false;
             self.showContract = false;
             self.showMessage = false;
@@ -370,7 +371,7 @@ export default {
           title: self.$t('common.swap')
         },
         {
-          click: function() {
+          click: function () {
             self.showSend = false;
             self.showContract = false;
             self.showMessage = false;
@@ -384,7 +385,7 @@ export default {
           title: self.$t('common.dapps')
         },
         {
-          click: function() {
+          click: function () {
             self.toggle('openContract');
           },
           isActive:
@@ -399,7 +400,7 @@ export default {
             {
               itemActive: self.currentTab === 'interactC',
               itemTitle: self.$t('common.interactWcontract'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('interactC');
               }
@@ -407,7 +408,7 @@ export default {
             {
               itemActive: self.currentTab === 'deployC',
               itemTitle: self.$t('common.depContract'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('deployC');
               }
@@ -415,7 +416,7 @@ export default {
           ]
         },
         {
-          click: function() {
+          click: function () {
             self.toggle('openMessage');
           },
           isActive:
@@ -432,7 +433,7 @@ export default {
             {
               itemActive: self.currentTab === 'signMessage',
               itemTitle: self.$t('common.signMessage'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('signMessage');
               }
@@ -440,7 +441,7 @@ export default {
             {
               itemActive: self.currentTab === 'verifyMessage',
               itemTitle: self.$t('common.verifyMessage'),
-              itemClick: function(e) {
+              itemClick: function (e) {
                 e.cancelBubble = true;
                 self.switchTabs('verifyMessage');
               }

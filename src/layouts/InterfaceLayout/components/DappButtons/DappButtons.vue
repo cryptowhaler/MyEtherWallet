@@ -1,7 +1,7 @@
 <template>
   <div @click.prevent="switcher">
     <div class="dapps-button">
-      <img :src="icon">
+      <img :src="icon" />
       <h4>{{ title }}</h4>
       <p>{{ desc }}</p>
     </div>

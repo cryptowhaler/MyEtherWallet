@@ -11,7 +11,7 @@ function create(password) {
   return createdWallet;
 }
 
-onmessage = function(event) {
+onmessage = function (event) {
   if (event.data.type === 'createWallet') {
     const workerResult = create(event.data.data[0]);
     postMessage(workerResult);

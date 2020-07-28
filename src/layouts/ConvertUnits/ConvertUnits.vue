@@ -1,7 +1,6 @@
 <template>
   <div class="convert-units">
     <div class="wrap">
-
       <div class="page-container">
         <div class="page-title">
           <h2>Convert Units</h2>
@@ -23,21 +22,19 @@
           <div class="unit-table">
             <table>
               <tbody>
-                <tr 
-                  v-for="eu in etherUnitRef" 
-                  :key="eu.key">
+                <tr v-for="eu in etherUnitRef" :key="eu.key">
                   <td>{{ eu.name }}</td>
                   <td>{{ eu.unit1 }}</td>
-                  <td>{{ eu.unit2 }}<span>{{ eu.unit2e }}</span></td>
+                  <td>
+                    {{ eu.unit2 }}<span>{{ eu.unit2e }}</span>
+                  </td>
                   <td>{{ eu.desc }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </template>

@@ -4,58 +4,85 @@
     :title="$t('accessWallet.accessBySoftware')"
     hide-footer
     class="bootstrap-modal modal-software"
-    centered>
+    centered
+  >
     <div class="d-block content-container text-center">
       <ul class="button-options">
         <li
-          :class="selected === 'byJson'? 'selected': ''"
-          @click="select('byJson')">
+          :class="selected === 'byJson' ? 'selected' : ''"
+          @click="select('byJson')"
+        >
           <img
-            :src="selected === 'byJson'? require('@/assets/images/icons/button-json-hover.svg'):require('@/assets/images/icons/button-json.svg')"
-            class="icon">
+            :src="
+              selected === 'byJson'
+                ? require('@/assets/images/icons/button-json-hover.svg')
+                : require('@/assets/images/icons/button-json.svg')
+            "
+            class="icon"
+          />
           <img
             class="hover-icon"
-            src="@/assets/images/icons/button-json-hover.svg">
-          <span>{{ $t("common.jsonF") }}</span>
+            src="@/assets/images/icons/button-json-hover.svg"
+          />
+          <span>{{ $t('common.jsonF') }}</span>
         </li>
         <li
-          :class="selected === 'byMnem'? 'selected': ''"
-          @click="select('byMnem')">
+          :class="selected === 'byMnem' ? 'selected' : ''"
+          @click="select('byMnem')"
+        >
           <img
-            :src="selected === 'byMnem'? require('@/assets/images/icons/button-mnemonic-hover.svg'):require('@/assets/images/icons/button-mnemonic.svg')"
-            class="icon">
+            :src="
+              selected === 'byMnem'
+                ? require('@/assets/images/icons/button-mnemonic-hover.svg')
+                : require('@/assets/images/icons/button-mnemonic.svg')
+            "
+            class="icon"
+          />
           <img
             class="hover-icon"
-            src="@/assets/images/icons/button-mnemonic-hover.svg">
-          <span>{{ $t("common.mnemonicP") }}</span>
+            src="@/assets/images/icons/button-mnemonic-hover.svg"
+          />
+          <span>{{ $t('common.mnemonicP') }}</span>
         </li>
         <li
-          :class="selected === 'byPriv'? 'selected': ''"
-          @click="select('byPriv')">
+          :class="selected === 'byPriv' ? 'selected' : ''"
+          @click="select('byPriv')"
+        >
           <img
-            :src="selected === 'byPriv'? require('@/assets/images/icons/button-key-hover.svg'):require('@/assets/images/icons/button-key.svg')"
-            class="icon">
+            :src="
+              selected === 'byPriv'
+                ? require('@/assets/images/icons/button-key-hover.svg')
+                : require('@/assets/images/icons/button-key.svg')
+            "
+            class="icon"
+          />
           <img
             class="hover-icon"
-            src="@/assets/images/icons/button-key-hover.svg">
-          <span>{{ $t("common.privKey") }}</span>
+            src="@/assets/images/icons/button-key-hover.svg"
+          />
+          <span>{{ $t('common.privKey') }}</span>
         </li>
       </ul>
       <input
         ref="jsonInput"
         type="file"
         name="file"
-        style="display: none"
-        @change="uploadFile">
+        style="display: none;"
+        @change="uploadFile"
+      />
     </div>
     <div class="button-container">
       <b-btn
-        :class="[selected !== ''? 'enabled': 'disabled','mid-round-button-green-filled']"
-        @click="continueAccess">
-        {{ $t("common.continue") }}
+        :class="[
+          selected !== '' ? 'enabled' : 'disabled',
+          'mid-round-button-green-filled'
+        ]"
+        @click="continueAccess"
+      >
+        {{ $t('common.continue') }}
       </b-btn>
     </div>
-    <customer-support/>
+    <customer-support />
   </b-modal>
 </template>
 
@@ -73,15 +100,15 @@ export default {
     },
     openPassword: {
       type: Function,
-      default: function() {}
+      default: function () {}
     },
     openMnemonicPhraseInput: {
       type: Function,
-      default: function() {}
+      default: function () {}
     },
     openPrivateKeyInput: {
       type: Function,
-      default: function() {}
+      default: function () {}
     }
   },
   data() {
@@ -111,7 +138,7 @@ export default {
     uploadFile(e) {
       const self = this;
       const reader = new FileReader();
-      reader.onloadend = function(evt) {
+      reader.onloadend = function (evt) {
         self.$emit('file', JSON.parse(evt.target.result));
         self.file = JSON.parse(evt.target.result);
       };

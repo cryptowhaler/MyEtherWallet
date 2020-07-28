@@ -1,14 +1,8 @@
 <template lang="html">
   <div class="notification-container">
-    <div
-      class="notification-logo"
-      @click="showNotifications">
-      <img
-        class="logo-large"
-        src="~@/assets/images/icons/notification.svg">
-      <div
-        v-show="unreadCount > 0"
-        class="notification-dot"/>
+    <div class="notification-logo" @click="showNotifications">
+      <img class="logo-large" src="~@/assets/images/icons/notification.svg" />
+      <div v-show="unreadCount > 0" class="notification-dot" />
     </div>
     <b-modal
       ref="notification"
@@ -16,35 +10,49 @@
       centered
       no-padding
       class="bootstrap-modal-wide nopadding"
-      @show="countUnread">
+      @show="countUnread"
+    >
       <template slot="modal-title">
-        <h5 class="modal-title"> {{ unreadCount > 1 ? 'Notifications':'Notification' }}
-          <div
-            v-show="unreadCount > 0"
-            class="notification-count"><span>{{ unreadCount }}</span>
+        <h5 class="modal-title">
+          {{ unreadCount > 1 ? 'Notifications' : 'Notification' }}
+          <div v-show="unreadCount > 0" class="notification-count">
+            <span>{{ unreadCount }}</span>
           </div>
         </h5>
       </template>
       <div class="notification-item-container">
-        <div v-if="sortedNotifications !== undefined && sortedNotifications.length > 0">
+        <div
+          v-if="
+            sortedNotifications !== undefined && sortedNotifications.length > 0
+          "
+        >
           <div
             v-for="(notification, idx) in sortedNotifications"
             :key="notification.title + notification.timestamp + idx"
-            class="notification-item">
+            class="notification-item"
+          >
             <div
               class="notification-header"
-              @click="expand(idx, notification, $event)">
-              <p :class="[notification.read? '': 'unread']"> {{ notification.title }} </p>
-              <p :class="[notification.read? '': 'unread']"> {{ notification.timestamp }}</p>
+              @click="expand(idx, notification, $event)"
+            >
+              <p :class="[notification.read ? '' : 'unread']">
+                {{ notification.title }}
+              </p>
+              <p :class="[notification.read ? '' : 'unread']">
+                {{ notification.timestamp }}
+              </p>
             </div>
-            <div :class="[notification.expanded?'':'unexpanded', 'notification-body']">
+            <div
+              :class="[
+                notification.expanded ? '' : 'unexpanded',
+                'notification-body'
+              ]"
+            >
               {{ notification.body }}
             </div>
           </div>
         </div>
-        <div
-          v-else
-          class="notification-no-item">
+        <div v-else class="notification-no-item">
           No notifications found :(
         </div>
       </div>
@@ -106,7 +114,7 @@ export default {
           0
       ) {
         self.notifications[self.$store.state.wallet.getAddressString()].map(
-          item => {
+          (item) => {
             if (item.read === false) {
               self.unreadCount++;
             }

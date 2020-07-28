@@ -1,9 +1,7 @@
 <template>
   <div class="interact-with-contract-container">
-    <interface-container-title :title="$t('common.interactWcontract')"/>
-    <div
-      v-if="!interact"
-      class="interact-div">
+    <interface-container-title :title="$t('common.interactWcontract')" />
+    <div v-if="!interact" class="interact-div">
       <div class="send-form">
         <div class="title-container">
           <div class="title">
@@ -13,21 +11,27 @@
                 :currency="network.type.contracts"
                 :token="false"
                 page="interactWContract"
-                @selectedCurrency="selectedCurrency"/>
+                @selectedCurrency="selectedCurrency"
+              />
             </div>
           </div>
         </div>
         <div class="the-form domain-name">
           <input
-            v-ens-resolver="address"
             v-model="address"
+            v-ens-resolver="address"
             type="text"
-            placeholder="Enter Domain Name or Address" >
+            placeholder="Enter Domain Name or Address"
+          />
 
           <i
-            :class="[validAddress && address !== ''? '': 'not-good' ,'fa fa-check-circle good-button']"
+            :class="[
+              validAddress && address !== '' ? '' : 'not-good',
+              'fa fa-check-circle good-button'
+            ]"
             aria-hidden="true"
-            class="address-validation-check"/>
+            class="address-validation-check"
+          />
         </div>
       </div>
 
@@ -37,37 +41,44 @@
             <h4>{{ $t('interface.abiJsonInt') }}</h4>
             <div class="copy-buttons">
               <span @click="deleteInput('abi')">{{ $t('common.clear') }}</span>
-              <span @click="copyToClipboard('abi')">{{ $t('common.copy') }}</span>
+              <span @click="copyToClipboard('abi')">{{
+                $t('common.copy')
+              }}</span>
             </div>
           </div>
         </div>
         <div class="the-form domain-name">
-          <textarea
-            ref="abi"
-            v-model="abi"
-            class="custom-textarea-1"
-            name=""/>
+          <textarea ref="abi" v-model="abi" class="custom-textarea-1" name="" />
           <i
-            :class="[validAbi && abi !== ''? '': 'not-good' ,'fa fa-check-circle good-button']"
-            aria-hidden="true"/>
+            :class="[
+              validAbi && abi !== '' ? '' : 'not-good',
+              'fa fa-check-circle good-button'
+            ]"
+            aria-hidden="true"
+          />
         </div>
       </div>
       <div class="submit-button-container">
         <div
-          :class="[(validAbi && validAddress) && (address !== '' && abi !== '')? '': 'disabled' ,'submit-button large-round-button-green-filled clickable']"
-          @click="switchView('forward')">
+          :class="[
+            validAbi && validAddress && address !== '' && abi !== ''
+              ? ''
+              : 'disabled',
+            'submit-button large-round-button-green-filled clickable'
+          ]"
+          @click="switchView('forward')"
+        >
           {{ $t('common.continue') }}
-          <img src="~@/assets/images/icons/right-arrow.png">
+          <img src="~@/assets/images/icons/right-arrow.png" />
         </div>
         <interface-bottom-text
           :link-text="$t('interface.learnMore')"
           :question="$t('interface.haveIssues')"
-          link="/"/>
+          link="/"
+        />
       </div>
     </div>
-    <div
-      v-else
-      class="interact-div">
+    <div v-else class="interact-div">
       <div class="send-form">
         <div class="title-container">
           <div class="title">
@@ -75,19 +86,18 @@
           </div>
         </div>
         <div class="address-container">
-          <div class="address"> Contract Address: {{ address }}</div>
+          <div class="address">Contract Address: {{ address }}</div>
           <div class="functions">
             <currency-picker
               :currency="methods"
               :token="false"
               page="interactWContract"
-              @selectedCurrency="selectFunction"/>
+              @selectedCurrency="selectFunction"
+            />
           </div>
         </div>
       </div>
-      <div
-        v-show="selectedMethod.name !== undefined"
-        class="send-form">
+      <div v-show="selectedMethod.name !== undefined" class="send-form">
         <div class="title-container">
           <div class="title">
             <h4>{{ selectedMethod.name }}</h4>
@@ -95,24 +105,28 @@
         </div>
         <div>
           <div
-            v-if="selectedMethod.constant === true && selectedMethod.inputs.length === 0"
-            class="the-form domain-name">
+            v-if="
+              selectedMethod.constant === true &&
+              selectedMethod.inputs.length === 0
+            "
+            class="the-form domain-name"
+          >
             <input
               v-model="result"
               type="text"
               name=""
               placeholder="0x00000000000000"
-              disabled >
+              disabled
+            />
           </div>
           <div
             v-for="(input, idx) in selectedMethod.inputs"
             v-else
             v-show="selectedMethod.inputs.length !== 0"
             :key="input.name + idx"
-            class="the-form domain-name">
-            <div
-              v-if="input.type === 'bool'"
-              class="bool-input">
+            class="the-form domain-name"
+          >
+            <div v-if="input.type === 'bool'" class="bool-input">
               <div class="title-container">
                 <div class="title">
                   <p>{{ input.name | capitalize }}</p>
@@ -124,8 +138,9 @@
                     v-model="writeInputs[input.name]"
                     :value="true"
                     :name="input.name"
-                    :checked="writeInputs[input.name] === true? true: false"
-                    type="radio">
+                    :checked="writeInputs[input.name] === true ? true : false"
+                    type="radio"
+                  />
                   <label :for="input.name">true</label>
                 </div>
                 <div>
@@ -133,40 +148,40 @@
                     v-model="writeInputs[input.name]"
                     :value="false"
                     :name="input.name"
-                    :checked="writeInputs[input.name] === false? true: false"
-                    type="radio">
+                    :checked="writeInputs[input.name] === false ? true : false"
+                    type="radio"
+                  />
                   <label :for="input.name">false</label>
                 </div>
               </div>
             </div>
             <input
               v-else
-              :type="checkType(input.type)"
               v-model="writeInputs[input.name]"
+              :type="checkType(input.type)"
               :placeholder="input.name"
               name=""
-              class="contract-inputs">
+              class="contract-inputs"
+            />
           </div>
           <div
             v-show="selectedMethod.constant === false"
-            class="the-form domain-name result-container">
+            class="the-form domain-name result-container"
+          >
             <div class="title-container">
               <div class="title">
-                <h4>Value: </h4>
+                <h4>Value:</h4>
               </div>
             </div>
-            <input
-              v-model="value"
-              type="text"
-              name=""
-              placeholder="ETH" >
+            <input v-model="value" type="text" name="" placeholder="ETH" />
           </div>
           <div
             v-if="result !== '' && selectedMethod.inputs.length > 0"
-            class="the-form domain-name result-container">
+            class="the-form domain-name result-container"
+          >
             <div class="title-container">
               <div class="title">
-                <h4>Result: </h4>
+                <h4>Result:</h4>
               </div>
             </div>
             <div class="result-inputs">
@@ -176,18 +191,42 @@
                 type="text"
                 name=""
                 placeholder="0x00000000000000"
-                disabled >
-              <div v-if="resType === 'object'"> <!-- Have to separate them since v-for still loops when v-if is in the same line getting max stack -->
+                disabled
+              />
+              <div v-if="resType === 'object'">
+                <!-- Have to separate them since v-for still loops when v-if is in the same line getting max stack -->
                 <div
                   v-for="(res, idx) in Object.keys(result)"
-                  :key="selectedMethod.outputs[idx].name !== ''? selectedMethod.outputs[idx].name + idx : selectedMethod.outputs[idx].type + idx">
-                  <label :name="selectedMethod.outputs[idx].name !== ''? selectedMethod.outputs[idx].name: selectedMethod.outputs[idx].type + idx"> {{ selectedMethod.outputs[idx].name !== ''? selectedMethod.outputs[idx].name: selectedMethod.outputs[idx].type }}</label>
+                  :key="
+                    selectedMethod.outputs[idx].name !== ''
+                      ? selectedMethod.outputs[idx].name + idx
+                      : selectedMethod.outputs[idx].type + idx
+                  "
+                >
+                  <label
+                    :name="
+                      selectedMethod.outputs[idx].name !== ''
+                        ? selectedMethod.outputs[idx].name
+                        : selectedMethod.outputs[idx].type + idx
+                    "
+                  >
+                    {{
+                      selectedMethod.outputs[idx].name !== ''
+                        ? selectedMethod.outputs[idx].name
+                        : selectedMethod.outputs[idx].type
+                    }}</label
+                  >
                   <input
-                    :name="selectedMethod.outputs[idx].name !== ''? selectedMethod.outputs[idx].name: selectedMethod.outputs[idx].type + idx"
+                    :name="
+                      selectedMethod.outputs[idx].name !== ''
+                        ? selectedMethod.outputs[idx].name
+                        : selectedMethod.outputs[idx].type + idx
+                    "
                     :value="result[res]"
                     type="text"
                     placeholder="0x00000000000000"
-                    disabled>
+                    disabled
+                  />
                 </div>
               </div>
             </div>
@@ -198,36 +237,47 @@
         <div class="buttons interact-buttons">
           <div
             class="submit-button large-round-button-green-border clickable"
-            @click="switchView('backwards')">
+            @click="switchView('backwards')"
+          >
             {{ $t('common.back') }}
           </div>
           <div
-            v-if="selectedMethod.constant === true && selectedMethod.inputs.length > 0"
-            :class="[inputsFilled? '': 'disabled', loading ? 'disabled': '','submit-button large-round-button-green-filled clickable']"
-            @click="write">
+            v-if="
+              selectedMethod.constant === true &&
+              selectedMethod.inputs.length > 0
+            "
+            :class="[
+              inputsFilled ? '' : 'disabled',
+              loading ? 'disabled' : '',
+              'submit-button large-round-button-green-filled clickable'
+            ]"
+            @click="write"
+          >
             <span v-show="!loading">
               Read
             </span>
-            <i
-              v-show="loading"
-              class="fa fa-spinner fa-spin fa-lg"/>
+            <i v-show="loading" class="fa fa-spinner fa-spin fa-lg" />
           </div>
           <div
             v-if="selectedMethod.constant === false"
-            :class="[inputsFilled? '': 'disabled', loading ? 'disabled': '','submit-button large-round-button-green-filled clickable']"
-            @click="write">
+            :class="[
+              inputsFilled ? '' : 'disabled',
+              loading ? 'disabled' : '',
+              'submit-button large-round-button-green-filled clickable'
+            ]"
+            @click="write"
+          >
             <span v-show="!loading">
               Write
             </span>
-            <i
-              v-show="loading"
-              class="fa fa-spinner fa-spin fa-lg"/>
+            <i v-show="loading" class="fa fa-spinner fa-spin fa-lg" />
           </div>
         </div>
         <interface-bottom-text
           :link-text="$t('interface.learnMore')"
           :question="$t('interface.haveIssues')"
-          link="/"/>
+          link="/"
+        />
       </div>
     </div>
   </div>
@@ -286,7 +336,7 @@ export default {
       this.writeInputs = {};
       for (const inputs in newVal) {
         if (newVal.hasOwnProperty(inputs)) {
-          newVal.inputs.forEach(input => {
+          newVal.inputs.forEach((input) => {
             this.$set(this.writeInputs, input.name, '');
           });
         }
@@ -294,7 +344,7 @@ export default {
     },
     writeInputs: {
       // Watches nested values instead
-      handler: function() {
+      handler: function () {
         this.checkInputsFilled();
       },
       deep: true
@@ -343,10 +393,10 @@ export default {
       if (method.constant === true && method.inputs.length === 0) {
         contract.methods[method.name]()
           .call({ from: this.$store.state.wallet.getAddressString() })
-          .then(res => {
+          .then((res) => {
             this.result = res;
           })
-          .catch(err => {
+          .catch((err) => {
             // eslint-disable-next-line
             console.error(err); // todo replace with proper error
           });
@@ -366,9 +416,9 @@ export default {
       switch (direction) {
         case 'forward':
           this.methods = JSON.parse(this.abi)
-            .map(func => func)
-            .filter(func => func.type !== 'constructor')
-            .filter(func => func.constant !== undefined);
+            .map((func) => func)
+            .filter((func) => func.type !== 'constructor')
+            .filter((func) => func.constant !== undefined);
           this.interact = true;
           break;
         default:
@@ -381,18 +431,18 @@ export default {
         [this.selectedMethod],
         this.address
       );
-      const params = Object.keys(this.writeInputs).map(input =>
+      const params = Object.keys(this.writeInputs).map((input) =>
         web3.utils.toHex(this.writeInputs[input])
       );
       this.loading = true;
       if (this.selectedMethod.constant === true) {
         contract.methods[this.selectedMethod.name](...params)
           .call({ from: this.$store.state.wallet.getAddressString() })
-          .then(res => {
+          .then((res) => {
             this.result = res;
             this.loading = false;
           })
-          .catch(err => {
+          .catch((err) => {
             // eslint-disable-next-line
             console.error(err); // todo replace with proper error
             this.loading = false;
@@ -405,14 +455,14 @@ export default {
           ...params
         )
           .estimateGas({ from: this.$store.state.wallet.getAddressString() })
-          .then(res => {
+          .then((res) => {
             this.transactionFee = unit.fromWei(
               unit.toWei(this.$store.state.gasPrice, 'gwei') * res,
               'ether'
             );
             return res;
           })
-          .catch(err => {
+          .catch((err) => {
             // eslint-disable-next-line
             console.error(err);
           });
@@ -430,15 +480,15 @@ export default {
             this.resolvedAddress !== ''
               ? this.resolvedAddress
               : this.address !== ''
-                ? this.address
-                : '',
+              ? this.address
+              : '',
           data: this.data
         };
 
         const fromAddress = this.raw.from;
         await web3.eth
           .sendTransaction(this.raw)
-          .once('transactionHash', hash => {
+          .once('transactionHash', (hash) => {
             this.loading = false;
             this.$store.dispatch('addNotification', [
               fromAddress,
@@ -446,7 +496,7 @@ export default {
               'Transaction Hash'
             ]);
           })
-          .on('receipt', res => {
+          .on('receipt', (res) => {
             this.loading = false;
             this.$store.dispatch('addNotification', [
               fromAddress,
@@ -454,7 +504,7 @@ export default {
               'Transaction Receipt'
             ]);
           })
-          .on('error', err => {
+          .on('error', (err) => {
             // eslint-disable-next-line
             console.error(err); // todo replace with proper error
             this.loading = false;

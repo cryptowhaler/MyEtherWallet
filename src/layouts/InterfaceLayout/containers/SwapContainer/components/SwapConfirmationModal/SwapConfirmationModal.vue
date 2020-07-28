@@ -5,7 +5,8 @@
       hide-footer
       centered
       class="bootstrap-modal bootstrap-modal-wide padding-40-20"
-      title="Confirmation">
+      title="Confirmation"
+    >
       <div class="time-remaining">
         <h1>09:25</h1>
         <p>Time Remaining</p>
@@ -13,35 +14,36 @@
       <div class="swap-detail">
         <div class="from-address">
           <div class="icon">
-            <img :src="fromAddress.image">
+            <img :src="fromAddress.image" />
           </div>
-          <p class="value">{{ fromAddress.value }} <span>{{ fromAddress.name }}</span></p>
+          <p class="value">
+            {{ fromAddress.value }} <span>{{ fromAddress.name }}</span>
+          </p>
           <p class="block-title">From Address</p>
           <p class="address">{{ fromAddress.address }}</p>
         </div>
         <div class="right-arrow">
-          <img :src="arrowImage">
+          <img :src="arrowImage" />
         </div>
         <div class="to-address">
           <div class="icon">
-            <img :src="toAddress.image">
+            <img :src="toAddress.image" />
           </div>
-          <p class="value">{{ toAddress.value }} <span>{{ toAddress.name }}</span></p>
+          <p class="value">
+            {{ toAddress.value }} <span>{{ toAddress.name }}</span>
+          </p>
           <p class="block-title">To Address</p>
           <p class="address">{{ toAddress.address }}</p>
         </div>
       </div>
 
-      <detail-information :details="detailInfo"/>
+      <detail-information :details="detailInfo" />
 
       <div class="confirm-send-button">
-        <button-with-qrcode
-          :qrcode="qrcode"
-          buttonname="Confirm and Send"/>
+        <button-with-qrcode :qrcode="qrcode" buttonname="Confirm and Send" />
       </div>
 
-      <help-center-button/>
-
+      <help-center-button />
     </b-modal>
   </div>
 </template>

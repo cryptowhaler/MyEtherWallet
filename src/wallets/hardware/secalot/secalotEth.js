@@ -1,15 +1,15 @@
 'use strict';
 
-const SecalotEth = function(comm, pinCode) {
+const SecalotEth = function (comm, pinCode) {
   this.comm = comm;
   if (typeof pinCode !== 'undefined') this.pinCode = pinCode;
 };
 
-SecalotEth.splitPath = function(path) {
+SecalotEth.splitPath = function (path) {
   const result = [];
   const components = path.split('/');
 
-  components.forEach(element => {
+  components.forEach((element) => {
     let number = parseInt(element, 10);
     if (isNaN(number)) {
       return;
@@ -22,7 +22,7 @@ SecalotEth.splitPath = function(path) {
   return result;
 };
 
-SecalotEth.getErrorMessage = function(sw, operation) {
+SecalotEth.getErrorMessage = function (sw, operation) {
   let errorMessage;
   if (sw === 0x6d00) {
     errorMessage = 'Ethereum wallet on your Secalot is not initialized.';
@@ -44,12 +44,12 @@ SecalotEth.getErrorMessage = function(sw, operation) {
   return errorMessage;
 };
 
-SecalotEth.prototype.getAddress = function(path, callback) {
+SecalotEth.prototype.getAddress = function (path, callback) {
   const splitPath = SecalotEth.splitPath(path);
   const apdus = [];
   let buffer;
   const self = this;
-  const localCallback = function(response, error) {
+  const localCallback = function (response, error) {
     if (typeof error !== 'undefined') {
       callback(undefined, error);
     } else {
@@ -98,13 +98,13 @@ SecalotEth.prototype.getAddress = function(path, callback) {
   self.comm.exchange(apdus.shift(), localCallback);
 };
 
-SecalotEth.prototype.signTransaction = function(path, eTx, callback) {
+SecalotEth.prototype.signTransaction = function (path, eTx, callback) {
   const splitPath = SecalotEth.splitPath(path);
   let offset = 0;
   let rawData = '';
   const apdus = [];
   const self = this;
-  const localCallback = function(response, error) {
+  const localCallback = function (response, error) {
     if (typeof error !== 'undefined') {
       callback(undefined, error);
     } else {
@@ -179,13 +179,13 @@ SecalotEth.prototype.signTransaction = function(path, eTx, callback) {
   self.comm.exchange(apdus.shift(), localCallback);
 };
 
-SecalotEth.prototype.signMessage = function(path, message, callback) {
+SecalotEth.prototype.signMessage = function (path, message, callback) {
   const splitPath = SecalotEth.splitPath(path);
   let offset = 0;
   let rawData = '';
   const apdus = [];
   const self = this;
-  const localCallback = function(response, error) {
+  const localCallback = function (response, error) {
     if (typeof error !== 'undefined') {
       callback(undefined, error);
     } else {

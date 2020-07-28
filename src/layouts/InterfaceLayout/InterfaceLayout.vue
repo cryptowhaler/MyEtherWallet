@@ -1,12 +1,11 @@
 <template>
-  <div
-    v-if="$store.state.wallet !== null"
-    class="send-eth-and-tokens">
+  <div v-if="$store.state.wallet !== null" class="send-eth-and-tokens">
     <div class="wrap">
       <div class="side-nav">
         <interface-side-menu
           :current-tab="currentTab"
-          :switch-tabs="switchTabs"/>
+          :switch-tabs="switchTabs"
+        />
       </div>
       <div class="contents">
         <div class="tx-contents">
@@ -14,35 +13,37 @@
             <interface-address :address="address" />
           </div>
           <div>
-            <interface-balance :balance="balance"/>
+            <interface-balance :balance="balance" />
           </div>
           <div>
             <interface-network :block-number="blockNumber" />
           </div>
           <send-currency-container
             v-show="currentTab === 'send' || currentTab === ''"
-            :tokens-with-balance="tokensWithBalance"/>
-          <send-offline-container v-show="currentTab === 'offline'"/>
-          <swap-container v-show="currentTab === 'swap'"/>
-          <dapps-container v-show="currentTab === 'dapps'"/>
-          <interact-with-contract-container v-show="currentTab === 'interactC'"/>
-          <sign-message-container v-show="currentTab === 'signMessage'"/>
-          <verify-message-container v-show="currentTab === 'verifyMessage'"/>
-          <deploy-contract-container v-show="currentTab === 'deployC'"/>
-          <div
-            v-if="$store.state.online"
-            class="tokens">
+            :tokens-with-balance="tokensWithBalance"
+          />
+          <send-offline-container v-show="currentTab === 'offline'" />
+          <swap-container v-show="currentTab === 'swap'" />
+          <dapps-container v-show="currentTab === 'dapps'" />
+          <interact-with-contract-container
+            v-show="currentTab === 'interactC'"
+          />
+          <sign-message-container v-show="currentTab === 'signMessage'" />
+          <verify-message-container v-show="currentTab === 'verifyMessage'" />
+          <deploy-contract-container v-show="currentTab === 'deployC'" />
+          <div v-if="$store.state.online" class="tokens">
             <interface-tokens
               :get-token-balance="getTokenBalance"
               :tokens="tokens"
-              :received-tokens="receivedTokens"/>
+              :received-tokens="receivedTokens"
+            />
           </div>
         </div>
       </div>
     </div>
   </div>
   <div v-else>
-    <wallet-not-found-container/>
+    <wallet-not-found-container />
   </div>
 </template>
 
@@ -175,10 +176,10 @@ export default {
           to: '0xBE1ecF8e340F13071761e0EeF054d9A511e1Cb56',
           data: data
         })
-        .then(response => {
+        .then((response) => {
           return response;
         })
-        .catch(err => {
+        .catch((err) => {
           // eslint-disable-next-line no-console
           console.error(err); // todo replace with proper error
         });
@@ -207,7 +208,7 @@ export default {
             : web3.utils.toChecksumAddress(token.addr),
           data: data
         })
-        .then(res => {
+        .then((res) => {
           let tokenBalance;
           if (Number(res) === 0 || res === '0x') {
             tokenBalance = 0;
@@ -215,14 +216,11 @@ export default {
             const denominator = web3.utils
               .toBN(10)
               .pow(web3.utils.toBN(token.decimals));
-            tokenBalance = web3.utils
-              .toBN(res)
-              .div(denominator)
-              .toString(10);
+            tokenBalance = web3.utils.toBN(res).div(denominator).toString(10);
           }
           return tokenBalance;
         })
-        .catch(err => {
+        .catch((err) => {
           // eslint-disable-next-line no-console
           console.error(err);
         });
@@ -242,7 +240,7 @@ export default {
         });
       } else {
         const tokenWithBalance = [];
-        this.network.type.tokens.map(async token => {
+        this.network.type.tokens.map(async (token) => {
           token.balance = await this.getTokenBalance(token);
           tokenWithBalance.push(token);
         });
@@ -261,17 +259,17 @@ export default {
         .filter(token => token.balance > 0);
       }
       const allTokens = this.tokens
-        .filter(token => token.balance > 0)
+        .filter((token) => token.balance > 0)
         .concat(customTokens);
       this.tokensWithBalance = allTokens;
     },
     getBlock() {
       this.$store.state.web3.eth
         .getBlockNumber()
-        .then(res => {
+        .then((res) => {
           this.blockNumber = res;
         })
-        .catch(err => {
+        .catch((err) => {
           // eslint-disable-next-line no-console
           console.error(err);
         });
@@ -280,11 +278,11 @@ export default {
       const web3 = this.$store.state.web3;
       web3.eth
         .getBalance(this.address)
-        .then(res => {
+        .then((res) => {
           this.balance = web3.utils.fromWei(res, 'ether');
           this.$store.dispatch('setAccountBalance', this.balance);
         })
-        .catch(err => {
+        .catch((err) => {
           // eslint-disable-next-line no-console
           console.error(err);
         });

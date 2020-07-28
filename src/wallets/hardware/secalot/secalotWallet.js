@@ -107,7 +107,7 @@ export default class SecalotWallet extends HardwareWalletInterface {
     const thisMessage = msgData.data ? msgData.data : msgData;
     const app = new SecalotEth(this.transport);
     return new Promise((resolve, reject) => {
-      app.signMessage(this.path, thisMessage, function(res, err) {
+      app.signMessage(this.path, thisMessage, function (res, err) {
         if (res === undefined) reject(err);
         resolve(res);
       });
@@ -137,7 +137,7 @@ export default class SecalotWallet extends HardwareWalletInterface {
 
   unlockSecalot(secalotSecret) {
     typeof secalotSecret === 'string' ? Number(secalotSecret) : secalotSecret;
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.transport = new SecalotUsb();
       const app = new SecalotEth(this.transport, secalotSecret);
       const path = this.path;
@@ -213,7 +213,7 @@ export default class SecalotWallet extends HardwareWalletInterface {
 
   // (Start) Internal methods underlying wallet usage methods
   async _getAccounts(count, offset) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const collect = {};
       if (
         this.addressesToIndexMap[offset] &&

@@ -98,7 +98,7 @@ export default class MewConnectWallet {
             .toString('hex'),
           text: thisMessage
         });
-        this.mewConnect.on('signMessage', data => {
+        this.mewConnect.on('signMessage', (data) => {
           if (this.isJSON(data)) {
             const signedMsg = JSON.parse(data);
             resolve(signedMsg);
@@ -116,9 +116,9 @@ export default class MewConnectWallet {
 
   // Implementation required
   signTransaction(txData) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.mewConnect.sendRtcMessage('signTx', JSON.stringify(txData));
-      this.mewConnect.on('signTx', data => {
+      this.mewConnect.on('signTx', (data) => {
         const rawTransaction = `0x${data}`;
         const tx = new EthereumjsTx(rawTransaction);
         resolve({
@@ -148,13 +148,13 @@ export default class MewConnectWallet {
   }
 
   signalerConnect(url) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (!url) {
         this.mewConnect.initiatorStart(this.signalerUrl);
       } else {
         this.mewConnect.initiatorStart(url);
       }
-      this.mewConnect.once('address', data => {
+      this.mewConnect.once('address', (data) => {
         this.wallet = this.createWallet(data.address);
         resolve();
       });

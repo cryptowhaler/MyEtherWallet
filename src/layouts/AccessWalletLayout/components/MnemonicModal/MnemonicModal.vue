@@ -4,37 +4,34 @@
     :title="$t('accessWallet.accessByMnemonicPhrase')"
     hide-footer
     class="bootstrap-modal modal-metamask"
-    centered>
-
+    centered
+  >
     <div class="contents">
-      <p class="instruction">{{ $t("accessWallet.pleaseTypeInMnemonicPhrase") }}</p>
+      <p class="instruction">
+        {{ $t('accessWallet.pleaseTypeInMnemonicPhrase') }}
+      </p>
       <div class="tools">
         <div class="value-switch noselect">
           <div class="sliding-switch">
             <label class="switch">
-              <input type="checkbox">
-              <span
-                class="slider round"
-                @click="mnemonicValueBitSizeChange"/>
+              <input type="checkbox" />
+              <span class="slider round" @click="mnemonicValueBitSizeChange" />
             </label>
             <div class="labels">
               <span class="label-left white">12</span>
               <span class="label-right">24</span>
             </div>
           </div>
-          <span class="text__base link switch-label">{{ $t("createWallet.byMnemonicValue") }}</span>
+          <span class="text__base link switch-label">{{
+            $t('createWallet.byMnemonicValue')
+          }}</span>
         </div>
-
       </div>
       <div class="phrases">
         <ul>
-          <li
-            v-for="index in mnemonicSize"
-            :key="index">
-            <span>{{ index }}.</span><input
-              v-model="mnemonicPhrase[index - 1]"
-              type="text"
-              name="">
+          <li v-for="index in mnemonicSize" :key="index">
+            <span>{{ index }}.</span
+            ><input v-model="mnemonicPhrase[index - 1]" type="text" name="" />
           </li>
         </ul>
       </div>
@@ -43,11 +40,12 @@
     <div class="button-container">
       <b-btn
         class="mid-round-button-green-filled close-button"
-        @click="openPasswordModal">
-        {{ $t("common.continue") }}
+        @click="openPasswordModal"
+      >
+        {{ $t('common.continue') }}
       </b-btn>
     </div>
-    <customer-support/>
+    <customer-support />
   </b-modal>
 </template>
 
@@ -61,7 +59,7 @@ export default {
   props: {
     mnemonicPhrasePasswordModalOpen: {
       type: Function,
-      default: function() {}
+      default: function () {}
     }
   },
   data() {

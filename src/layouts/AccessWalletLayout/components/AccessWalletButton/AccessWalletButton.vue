@@ -1,25 +1,15 @@
 <template>
-  <div
-    :class="[!disabled ? 'disabled': '','button-block']"
-    @click="func">
+  <div :class="[!disabled ? 'disabled' : '', 'button-block']" @click="func">
     <div class="button-image">
-      <img
-        :src="img"
-        class="icon">
+      <img :src="img" class="icon" />
     </div>
     <h3>{{ title }}</h3>
     <p>{{ desc }}</p>
-    <p
-      :v-if="recommend !== ''"
-      class="small-note">{{ recommend }}</p>
+    <p :v-if="recommend !== ''" class="small-note">{{ recommend }}</p>
     <div class="tooltip-box">
       <span>
-        <b-btn
-          v-b-tooltip.hover
-          :title="tooltip">
-          <i
-            class="fa fa-question-circle-o"
-            aria-hidden="true"/>
+        <b-btn v-b-tooltip.hover :title="tooltip">
+          <i class="fa fa-question-circle-o" aria-hidden="true" />
         </b-btn>
       </span>
     </div>
@@ -31,7 +21,7 @@ export default {
   props: {
     func: {
       type: Function,
-      default: function() {}
+      default: function () {}
     },
     img: {
       type: String,

@@ -1,6 +1,6 @@
 <template>
   <div class="register-domain-container">
-    <back-button :reset-view="resetView"/>
+    <back-button :reset-view="resetView" />
 
     <div class="send-form">
       <div class="title-container">
@@ -14,7 +14,8 @@
           type="text"
           name=""
           value=""
-          placeholder="Please Enter at Least 7 Characters" >
+          placeholder="Please Enter at Least 7 Characters"
+        />
         <span>.eth</span>
       </div>
     </div>
@@ -30,33 +31,26 @@
           <div class="margin-left-auto add-custom-network">
             <div class="sliding-switch-white">
               <label class="switch">
-                <input
-                  type="checkbox"
-                  @click="expendDomainCheckForm" >
-                <span class="slider round"/>
+                <input type="checkbox" @click="expendDomainCheckForm" />
+                <span class="slider round" />
               </label>
             </div>
           </div>
         </div>
-        <div
-          ref="checkForm"
-          class="domain-check-form hidden">
+        <div ref="checkForm" class="domain-check-form hidden">
           <div class="domain-checker">
             <input
               type="number"
               name=""
               value=""
-              placeholder="Enter Domain Name" >
-            <div
-              class="check-button"
-              @click="domainAvailabilityCheck">
+              placeholder="Enter Domain Name"
+            />
+            <div class="check-button" @click="domainAvailabilityCheck">
               {{ $t('common.check') }}
             </div>
           </div>
         </div>
-        <div
-          ref="domainList"
-          class="sub-domain-list hidden">
+        <div ref="domainList" class="sub-domain-list hidden">
           <h4 class="title">{{ $t('interface.allSubDomains') }}</h4>
           <ul>
             <li>
@@ -65,7 +59,8 @@
                 <p>0 ETH</p>
                 <div
                   class="buy-button very-small-circle-button-green-border"
-                  @click="domainBuyButtonClick($event)">
+                  @click="domainBuyButtonClick($event)"
+                >
                   {{ $t('common.buy') }}
                 </div>
               </div>
@@ -76,7 +71,8 @@
                 <p>0 ETH</p>
                 <div
                   class="buy-button very-small-circle-button-green-border very-small-circle-button-green-filled"
-                  @click="domainBuyButtonClick($event)">
+                  @click="domainBuyButtonClick($event)"
+                >
                   {{ $t('common.buy') }}
                 </div>
               </div>
@@ -87,7 +83,8 @@
                 <p>0 ETH</p>
                 <div
                   class="buy-button very-small-circle-button-green-border"
-                  @click="domainBuyButtonClick($event)">
+                  @click="domainBuyButtonClick($event)"
+                >
                   {{ $t('common.buy') }}
                 </div>
               </div>
@@ -98,7 +95,8 @@
                 <p>0 ETH</p>
                 <div
                   class="buy-button very-small-circle-button-green-border"
-                  @click="domainBuyButtonClick($event)">
+                  @click="domainBuyButtonClick($event)"
+                >
                   {{ $t('common.buy') }}
                 </div>
               </div>
@@ -109,7 +107,8 @@
                 <p>0 ETH</p>
                 <div
                   class="buy-button very-small-circle-button-green-border"
-                  @click="domainBuyButtonClick($event)">
+                  @click="domainBuyButtonClick($event)"
+                >
                   {{ $t('common.buy') }}
                 </div>
               </div>
@@ -120,7 +119,8 @@
                 <p>0 ETH</p>
                 <div
                   class="buy-button very-small-circle-button-green-border"
-                  @click="domainBuyButtonClick($event)">
+                  @click="domainBuyButtonClick($event)"
+                >
                   {{ $t('common.buy') }}
                 </div>
               </div>
@@ -131,7 +131,8 @@
                 <p>0 ETH</p>
                 <div
                   class="buy-button very-small-circle-button-green-border"
-                  @click="domainBuyButtonClick($event)">
+                  @click="domainBuyButtonClick($event)"
+                >
                   {{ $t('common.buy') }}
                 </div>
               </div>
@@ -142,9 +143,9 @@
       <interface-bottom-text
         :link-text="$t('interface.learnMore')"
         :question="$t('interface.haveIssues')"
-        link="/"/>
+        link="/"
+      />
     </div>
-
   </div>
 </template>
 
@@ -160,7 +161,7 @@ export default {
   props: {
     resetView: {
       type: Function,
-      default: function() {}
+      default: function () {}
     }
   },
   data() {

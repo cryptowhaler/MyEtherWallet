@@ -1,24 +1,24 @@
-const account = state => {
+const account = (state) => {
   return state.account;
 };
 
-const all = state => {
+const all = (state) => {
   return state;
 };
 
-const network = state => {
+const network = (state) => {
   return state.network;
 };
 
-const notifications = state => {
+const notifications = (state) => {
   return state.notifications;
 };
 
-const online = state => {
+const online = (state) => {
   return state.online;
 };
 
-const wallet = state => {
+const wallet = (state) => {
   return state.wallet;
 };
 

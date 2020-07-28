@@ -4,21 +4,26 @@
     :title="$t('accessWallet.accessByPrivateKey')"
     hide-footer
     class="bootstrap-modal modal-software"
-    centered>
+    centered
+  >
     <form class="private-key-form">
       <div class="input-container">
         <input
           v-model="privateKey"
           type="text"
           name="PrivateKey"
-          autocomplete="off" >
+          autocomplete="off"
+        />
       </div>
       <button
-        :disabled=" privateKey === '' && privateKey.length === 0 && privateKey.length < 9"
+        :disabled="
+          privateKey === '' && privateKey.length === 0 && privateKey.length < 9
+        "
         class="submit-button large-round-button-green-filled"
         type="submit"
-        @click.prevent="unlockWallet">
-        {{ $t("accessWallet.unlockWallet") }}
+        @click.prevent="unlockWallet"
+      >
+        {{ $t('accessWallet.unlockWallet') }}
       </button>
     </form>
   </b-modal>

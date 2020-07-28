@@ -1,53 +1,58 @@
 <template>
   <div class="access-my-wallet-options">
-
-    <mew-connect-modal
+    <!-- <mew-connect-modal
       ref="mewconnectModal"
-      :network-and-address-open="networkAndAddressOpen"/>
+      :network-and-address-open="networkAndAddressOpen"
+    /> -->
 
     <hardware-modal
       ref="hardwareModal"
       :network-and-address-open="networkAndAddressOpen"
       @hardwareRequiresPassword="hardwarePasswordModalOpen"
-      @hardwareWalletOpen="hardwareWalletOpen"/>
+      @hardwareWalletOpen="hardwareWalletOpen"
+    />
 
     <hardware-password-modal
       ref="hardwarePasswordModal"
       :wallet-constructor="walletConstructor"
       :hardware-brand="hardwareBrand"
-      @hardwareWalletOpen="hardwareWalletOpen"/>
+      @hardwareWalletOpen="hardwareWalletOpen"
+    />
 
     <network-and-address-modal
       ref="networkandaddressModal"
-      :hardware-wallet="hardwareWallet"/>
+      :hardware-wallet="hardwareWallet"
+    />
 
-    <install-metamask-modal
+    <!-- <install-metamask-modal
       ref="installMetamaskModal"
-      :metamaskmodal="installMetamaskModalOpen"/>
+      
+    /> -->
 
-    <metamask-modal ref="metamastModal"/>
+    <metamask-modal ref="metamastModal" :metamaskmodal="installMetamaskModalOpen" />
 
     <software-modal
       ref="softwareModal"
       :open-password="passwordOpen"
       :open-private-key-input="privateKeyOpen"
       :open-mnemonic-phrase-input="mnemonicphraseModalOpen"
-      @file="fileUploaded"/>
+      @file="fileUploaded"
+    />
 
-    <password-modal
-      ref="passwordModal"
-      :file="file"/>
+    <password-modal ref="passwordModal" :file="file" />
 
-    <private-key-modal ref="privatekeyModal"/>
+    <private-key-modal ref="privatekeyModal" />
 
     <mnemonic-modal
       ref="mnemonicPhraseModal"
-      :mnemonic-phrase-password-modal-open="mnemonicphrasePasswordModalOpen"/>
+      :mnemonic-phrase-password-modal-open="mnemonicphrasePasswordModalOpen"
+    />
 
     <mnemonic-password-modal
       ref="mnemonicPhrasePassword"
       :hardware-wallet-open="hardwareWalletOpen"
-      :phrase="phrase"/>
+      :phrase="phrase"
+    />
 
     <div class="wrap">
       <div class="page-container">
@@ -56,8 +61,14 @@
           <h5>
             {{ $t('common.noWallet') }}
             <router-link
-              :to="$store.state.wallet === null || $store.state.wallet === undefined ? '/access-my-wallet' : '/interface'"
-              class="nounderline">
+              :to="
+                $store.state.wallet === null ||
+                $store.state.wallet === undefined
+                  ? '/access-my-wallet'
+                  : '/interface'
+              "
+              class="nounderline"
+            >
               {{ $t('common.getAFreeWallet') }}
             </router-link>
           </h5>
@@ -65,7 +76,7 @@
         <div class="buttons-container">
           <access-wallet-button
             v-for="(button, index) in buttons"
-            :key="button.title+index"
+            :key="button.title + index"
             :func="button.func"
             :img="button.img"
             :title="button.title"
@@ -77,7 +88,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -125,18 +135,18 @@ export default {
       phrase: '',
       hardwareWallet: {},
       hardwareAddresses: [],
-      walletConstructor: function() {},
+      walletConstructor: function () {},
       hardwareBrand: '',
       buttons: [
-        {
-          func: this.mewConnectModalOpen,
-          title: this.$t('common.mewConnect'),
-          desc: this.$t('accessWallet.mewConnectDesc'),
-          recommend: '',
-          tooltip: this.$t('common.toolTip3'),
-          img: this.$store.state.online ? mewConnectImg : mewConnectDisabledImg,
-          disabled: this.$store.state.online
-        },
+        // {
+        //   func: this.mewConnectModalOpen,
+        //   title: this.$t('common.mewConnect'),
+        //   desc: this.$t('accessWallet.mewConnectDesc'),
+        //   recommend: '',
+        //   tooltip: this.$t('common.toolTip3'),
+        //   img: this.$store.state.online ? mewConnectImg : mewConnectDisabledImg,
+        //   disabled: this.$store.state.online
+        // },
         {
           func: this.hardwareModalOpen,
           title: this.$t('common.hardware'),
@@ -147,7 +157,7 @@ export default {
           disabled: this.$store.state.online
         },
         {
-          func: this.installMetamaskModalOpen,
+          func: this.metamaskModalOpen,
           title: 'MetaMask',
           desc: this.$t('accessWallet.metaMaskDesc'),
           recommend: '',
@@ -212,7 +222,7 @@ export default {
     },
     hardwareWalletOpen(wallet) {
       try {
-        this.walletConstructor = function() {};
+        this.walletConstructor = function () {};
         this.hardwareBrand = '';
         wallet.getDerivationPath(); // hacky way to check. should throw an error if not ready (need to implement a better mechanism)
         this.hardwareWallet = wallet;

@@ -2,7 +2,7 @@
   <div class="category-button">
     <div class="wrap">
       <div class="button-icon">
-        <img :src="content.icon">
+        <img :src="content.icon" />
       </div>
       <div class="button-title">
         {{ content.title }}

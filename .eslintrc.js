@@ -1,5 +1,5 @@
 module.exports = {
-  root: true,
+  root: false,
   env: {
     node: true
   },
@@ -11,8 +11,10 @@ module.exports = {
     'arrow-parens': 'off',
     'generator-star-spacing': 'off',
     semi: 'off',
-    'prefer-const': 'error',
-    'no-var': 'error'
+    'prefer-const': 'off',
+    'no-var': 'off',
+    'no-unused-vars': 'off',
+    'no-unused-components' : 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'

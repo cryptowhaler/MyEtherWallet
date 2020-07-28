@@ -1,5 +1,5 @@
 import { Wallet, Configs } from '@/helpers';
-export default password => {
+export default (password) => {
   const createdWallet = {};
   const wallet = new Wallet.generate();
   createdWallet.walletJson = wallet.toV3(password, {

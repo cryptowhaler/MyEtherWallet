@@ -4,55 +4,56 @@
     :title="$t('accessWallet.accessByHardware')"
     hide-footer
     class="bootstrap-modal modal-hardware"
-    centered>
+    centered
+  >
     <div class="d-block text-center">
-      <span v-show="mayNotBeAttached">(TEMP implementation) Please check if your device is connected</span>
-      <ul
-        ref="hardwareList"
-        class="button-options hardware-button-options">
+      <span v-show="mayNotBeAttached"
+        >(TEMP implementation) Please check if your device is connected</span
+      >
+      <ul ref="hardwareList" class="button-options hardware-button-options">
         <li
-          :class="selected === 'ledger'? 'active': ''"
-          @click="select('ledger')">
+          :class="selected === 'ledger' ? 'active' : ''"
+          @click="select('ledger')"
+        >
           <!--<img class="icon" :src="selected === 'ledger'? require('@/assets/images/icons/button-ledger.png') : require('@/assets/images/icons/button-ledger-hover.png')">-->
-          <img
-            class="icon"
-            src="~@/assets/images/icons/button-ledger.png">
+          <img class="icon" src="~@/assets/images/icons/button-ledger.png" />
           <img
             class="icon-hover"
-            src="~@/assets/images/icons/button-ledger-hover.png">
+            src="~@/assets/images/icons/button-ledger-hover.png"
+          />
           <span>Ledger Wallet</span>
         </li>
         <li
-          :class="selected === 'trezor'? 'active': ''"
-          @click="select('trezor')">
-          <img
-            class="icon"
-            src="~@/assets/images/icons/button-trezor.png">
+          :class="selected === 'trezor' ? 'active' : ''"
+          @click="select('trezor')"
+        >
+          <img class="icon" src="~@/assets/images/icons/button-trezor.png" />
           <img
             class="icon-hover"
-            src="~@/assets/images/icons/button-trezor-hover.png">
+            src="~@/assets/images/icons/button-trezor-hover.png"
+          />
           <span>Trezor</span>
         </li>
         <li
-          :class="selected === 'bitbox'? 'active': ''"
-          @click="select('bitbox')">
-          <img
-            class="icon"
-            src="~@/assets/images/icons/button-bitbox.png">
+          :class="selected === 'bitbox' ? 'active' : ''"
+          @click="select('bitbox')"
+        >
+          <img class="icon" src="~@/assets/images/icons/button-bitbox.png" />
           <img
             class="icon-hover"
-            src="~@/assets/images/icons/button-bitbox-hover.png">
+            src="~@/assets/images/icons/button-bitbox-hover.png"
+          />
           <span>Digital Bitbox</span>
         </li>
         <li
-          :class="selected === 'secalot'? 'active': ''"
-          @click="select('secalot')">
-          <img
-            class="icon"
-            src="~@/assets/images/icons/button-secalot.png">
+          :class="selected === 'secalot' ? 'active' : ''"
+          @click="select('secalot')"
+        >
+          <img class="icon" src="~@/assets/images/icons/button-secalot.png" />
           <img
             class="icon-hover"
-            src="~@/assets/images/icons/button-secalot-hover.png">
+            src="~@/assets/images/icons/button-secalot-hover.png"
+          />
           <span>Secalot</span>
         </li>
       </ul>
@@ -61,12 +62,16 @@
       <!--<div class="mid-round-button-green-filled connection-button waiting-for-connection" v-on:click="networkAndAddressOpen">-->
       <!--<div class="mid-round-button-green-filled connection-button waiting-for-connection" @click="continueAccess">-->
       <div
-        :class="[selected !== ''? 'enabled': 'disabled','mid-round-button-green-filled']"
-        @click="continueAccess">
-        {{ $t("accessWallet.accessDeviceAddresses") }}
+        :class="[
+          selected !== '' ? 'enabled' : 'disabled',
+          'mid-round-button-green-filled'
+        ]"
+        @click="continueAccess"
+      >
+        {{ $t('accessWallet.accessDeviceAddresses') }}
       </div>
     </div>
-    <customer-support/>
+    <customer-support />
   </b-modal>
 </template>
 
@@ -86,11 +91,11 @@ export default {
   props: {
     networkAndAddressOpen: {
       type: Function,
-      default: function() {}
+      default: function () {}
     },
     hardwareWalletOpen: {
       type: Function,
-      default: function() {}
+      default: function () {}
     }
   },
   data() {
@@ -114,22 +119,22 @@ export default {
       switch (this.selected) {
         case 'ledger':
           LedgerWallet.unlock()
-            .then(wallet => {
+            .then((wallet) => {
               clearTimeout(showPluggedInReminder);
               this.$emit('hardwareWalletOpen', wallet);
             })
-            .catch(_error => {
+            .catch((_error) => {
               // eslint-disable-next-line
               console.error(_error); // todo replace with proper error
             });
           break;
         case 'trezor':
           TrezorWallet.unlock()
-            .then(wallet => {
+            .then((wallet) => {
               clearTimeout(showPluggedInReminder);
               this.$emit('hardwareWalletOpen', wallet);
             })
-            .catch(_error => {
+            .catch((_error) => {
               // eslint-disable-next-line
               console.error(_error); // todo replace with proper error
             });

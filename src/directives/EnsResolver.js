@@ -1,10 +1,10 @@
 const EnsResolver = {
-  update: function(el, binding, vnode) {
+  update: function (el, binding, vnode) {
     const errorPar = document.createElement('p');
     const web3 = vnode.context.$store.state.web3;
     const ens = vnode.context.$store.state.ens;
     const _this = vnode.context;
-    const removeElements = function() {
+    const removeElements = function () {
       if (vnode.elm.parentElement.children.length > 2) {
         vnode.elm.parentElement.classList.remove('with-resolver');
         vnode.elm.parentElement.children[1].remove();
@@ -33,7 +33,7 @@ const EnsResolver = {
           ens
             .resolver(el.value)
             .addr()
-            .then(address => {
+            .then((address) => {
               removeElements();
               _this.resolvedAddress = address;
               _this.validAddress = true;
